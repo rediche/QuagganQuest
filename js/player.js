@@ -1,19 +1,8 @@
-class Player extends createjs.Container {
+class Player extends Container {
   constructor() {
     super();
 
     this.makeBody('white');
-  }
-
-  setPosition(x, y) {
-    this.x = x;
-    this.y = y;
-
-    return;
-  }
-
-  setGridPosition(col, row) {
-    this.setPosition(col * 64, row * 64);
   }
 
   makeBody(color) {
