@@ -23,6 +23,9 @@ function queueProgress(e) {
 
 function queueComplete(e) {
   console.log("Queue Completed!");
+  game.player = new Player();
+  game.player.setGridPosition(10, 8);
+  game.stage.addChild(game.player);
   game.stage.update(e);
 }
 
