@@ -1,13 +1,28 @@
 [{
   "name": "Divinity's Reach",
-  "baseTile": "green",
-  "layers": [[
-    {
-      "type": "water",
-      "startCol": 2,
-      "startRow": 3,
-      "endCol": 4,
-      "endRow": 5
-    }
-  ]]
+  "layers": [
+    [
+      {
+        "type": "grass",
+        "grid": {
+          "col": 0,
+          "row": 0
+        },
+        "size": {
+          "cols": 27,
+          "rows": 19
+        }
+      },{
+        "type": "water",
+        "grid": {
+          "col": 2,
+          "row": 3
+        },
+        "size": {
+          "cols": 2,
+          "rows": 2
+        }
+      }
+    ]
+  ]
 }]

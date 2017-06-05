@@ -1,6 +1,6 @@
 class Utility {
   constructor() {
-    console.log("Utility constructed!");
+    //console.log("Utility constructed!");
   }
 
   /**

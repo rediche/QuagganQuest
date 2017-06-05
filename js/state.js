@@ -1,6 +1,6 @@
 const MANIFEST = [{
-  id: "mapsJson",
-  src: "data/maps.json"
+  "id": "mapsJson",
+  "src": "data/maps.json"
 }];
 
 let game = {

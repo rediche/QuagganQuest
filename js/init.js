@@ -1,5 +1,5 @@
 function initialize() {
-  console.log("Starting Quaggan Quest...");
+  //console.log("Starting Quaggan Quest...");
 
   // Set FPS to 60.
   createjs.Ticker.setFPS(60);
@@ -16,25 +16,26 @@ function initialize() {
 }
 
 function queueProgress(e) {
-  console.log("Queue Progress:", e.progress);
+  //console.log("Queue Progress:", e.progress);
   game.stage.update(e);
 }
 
 function queueComplete(e) {
-  console.log("Queue Completed!");
-  initMap();
+  //console.log("Queue Completed!");
+  //console.log(game.queue.getResult('mapsJson')[0]);
+  initMap(game.queue.getResult('mapsJson')[0]); // TODO: Shouldn't be hardcoded like this
   initPlayer();
   game.stage.update(e);
 }
 
 function initPlayer() {
   game.player = new Player();
-  game.player.setGridPosition(6, 4);
+  game.player.setGridPosition(13, 9);
   game.stage.addChild(game.player);
 }
 
-function initMap() {
-  game.map = new Map();
+function initMap( settings ) {
+  game.map = new Map(settings);
   game.stage.addChild(game.map);
 }
 

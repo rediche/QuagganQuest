@@ -1,19 +1,49 @@
 class Map extends Container {
-  constructor() {
+  constructor( settings ) {
     super();
-    console.log("Constructing Map...");
 
-    this.makeBaseTile('green');
+    // Include the position mixin
+    Object.assign(this, positionMixin);
+
+    this.settings = settings;
+    console.log("Constructing Map:", this.settings.name);
+
+    console.log(this.settings.layers[0]);
+    this.drawLayers(this.settings.layers);
+    //this.makeBaseTile('green');
   }
 
-  makeBaseTile(color) {
-    let baseTile = new createjs.Shape();
+  drawLayers( layers ) {
+    layers.forEach(layer => {
+      this.drawLayer(layer);
+    });
+  }
 
-    baseTile.graphics.beginFill(color);
-    baseTile.graphics.drawRect(0, 0, 64, 64);
+  drawLayer( layer ) {
+    let that = this;
+    layer.forEach(section => {
+      for(let col = 0; col < section.size.cols; col++) {
+        for(let row = 0; row < section.size.rows; row++) {
+          let newTile = that.determineTileType(section.type);
+          newTile.graphics.drawRect(0, 0, 32, 32);
+          newTile.setGridPosition(section.grid.col + col, section.grid.row + row);
+          that.addChild(newTile);
+        }
+      }
+    });
+  }
 
-    
+  determineTileType( type ) {
+    let tile;
+    switch( type ) {
+      case 'grass':
+        tile = new Grass();
+        break;
+      case 'water':
+        tile = new Water();
+        break;
+    }
 
-    this.addChild(baseTile);
+    return tile;
   }
 }
