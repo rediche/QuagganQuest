@@ -92,7 +92,6 @@ class Map extends Container {
 
       this.setPosition(newX, newY);
     }
-    
   }
 
   /**
@@ -102,7 +101,6 @@ class Map extends Container {
    * @param {Number} diffY 
    */
   canMoveTo(diffX, diffY) {
-    //console.log(diffX, diffY);
     // Kør gennem alle this.objects
     // Hvis de vil ramme diffX/diffY, så tjek om den er walkable
     let validPosition = true;
@@ -121,12 +119,10 @@ class Map extends Container {
       }
     }
 
-
     return validPosition;
   }
 
   getObjectAt(x, y, diffX, diffY) {
-    //console.log(this.objects);
     let map = game.map.obj;
 
     let match = this.objects.find(object => {
