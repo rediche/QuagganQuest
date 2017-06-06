@@ -8,5 +8,6 @@ let game = {
   queue: null,
   utility: null,
   player: null,
-  map: null
+  map: null,
+  paused: false
 };

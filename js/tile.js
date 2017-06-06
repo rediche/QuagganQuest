@@ -1,5 +1,6 @@
 /**
- * Inspired by https://github.com/petlatkea/petersplayground/blob/master/js/tiles.js
+ * Inspired by PETL
+ * Src: https://github.com/petlatkea/petersplayground/blob/master/js/tiles.js
  */
 class Tile extends createjs.Shape {
   constructor( type ) {

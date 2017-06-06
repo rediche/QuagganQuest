@@ -26,6 +26,9 @@ function queueComplete(e) {
   initMap(game.queue.getResult('mapsJson')[0]); // TODO: Shouldn't be hardcoded like this
   initPlayer();
   game.stage.update(e);
+
+  /* Add tick listener */
+  createjs.Ticker.addEventListener('tick', onTick);
 }
 
 function initPlayer() {
@@ -37,6 +40,17 @@ function initPlayer() {
 function initMap( settings ) {
   game.map = new Map(settings);
   game.stage.addChild(game.map);
+}
+
+function onTick(e) {
+  
+  if (game.paused === true) {
+    console.log("Game paused");
+  } else {
+    console.log("Game running");
+  }
+
+  game.stage.update(e);
 }
 
 window.addEventListener('load', initialize);
