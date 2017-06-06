@@ -105,15 +105,10 @@ class Map extends Container {
     // Kør gennem alle this.objects
     // Hvis de vil ramme diffX/diffY, så tjek om den er walkable
     let validPosition = true;
-    let player = game.player;
-    console.log(player);
-    this.objects.forEach(object => {
-      if(this.hitTest(object, player)) {
-        console.log("touch");
-      }
-    });
 
-    return validPosition;
+    // Somehow get object at x, y range and check against player position. 
+
+    return false //validPosition;
   }
 
   getObjectAt(x, y) {
