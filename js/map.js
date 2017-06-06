@@ -9,7 +9,7 @@ class Map extends Container {
     this.settings = settings;
 
     // Set initial state
-    this.speed = 1;
+    this.speed = 2;
     this.objects = [];
 
     console.log("Constructing Map:", this.settings.name);
