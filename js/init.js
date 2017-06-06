@@ -29,6 +29,67 @@ function queueComplete(e) {
 
   /* Add tick listener */
   createjs.Ticker.addEventListener('tick', onTick);
+
+  /* Add keyboard listeners */
+  window.addEventListener('keydown', keyPressed);
+  window.addEventListener('keyup', keyReleased);
+}
+
+function keyPressed(e) {
+  switch (e.key) {
+    case 'ArrowUp':
+      keys.up = true;
+      e.preventDefault();
+      break;
+    case 'ArrowDown':
+      keys.down = true;
+      e.preventDefault();
+      break;
+    case 'ArrowLeft':
+      keys.left = true;
+      e.preventDefault();
+      break;
+    case 'ArrowRight':
+      keys.right = true;
+      e.preventDefault();
+      break;
+  }
+}
+
+function keyReleased(e) {
+  switch (e.key) {
+    case 'ArrowUp':
+      keys.up = false;
+      e.preventDefault();
+      break;
+    case 'ArrowDown':
+      keys.down = false;
+      e.preventDefault();
+      break;
+    case 'ArrowLeft':
+      keys.left = false;
+      e.preventDefault();
+      break;
+    case 'ArrowRight':
+      keys.right = false;
+      e.preventDefault();
+      break;
+  }
+}
+
+function moveMap( map ) {
+  // Move opposite direction of what is pressed, because we're moving the map
+  if (keys.left) {
+    map.move('right');
+  } else if (keys.right) {
+    map.move('left');
+  }
+
+  if (keys.up) {
+    map.move('down');
+  } else if (keys.down) {
+    map.move('up');
+  }
 }
 
 function startMap( map ) {
@@ -53,6 +114,7 @@ function onTick(e) {
     console.log("Game paused");
   } else {
     console.log("Game running");
+    moveMap( game.map.obj );
   }
 
   game.stage.update(e);

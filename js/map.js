@@ -5,7 +5,12 @@ class Map extends Container {
     // Include the position mixin
     Object.assign(this, positionMixin);
 
+    // Load parameters into the class
     this.settings = settings;
+
+    // Set initial state
+    this.speed = 2;
+
     console.log("Constructing Map:", this.settings.name);
 
     // Draw Floor of map
@@ -57,19 +62,20 @@ class Map extends Container {
     return tile;
   }
 
-  /*move( direction ) {
+  move( direction ) {
     switch (direction) {
       case 'up':
-        this.y = this.y - 32;
+        this.y = this.y - this.speed;
         break;
       case 'down':
-        this.y = this.y + 32;
+        this.y = this.y + this.speed;
         break;
       case 'left':
-        this.x = this.x - 32;
+        this.x = this.x - this.speed;
         break;
       case 'right':
+        this.x = this.x + this.speed;
         break;
     }
-  }*/
+  }
 }
