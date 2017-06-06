@@ -9,5 +9,6 @@ let game = {
   utility: null,
   player: null,
   map: null,
+  level: null,
   paused: false
 };

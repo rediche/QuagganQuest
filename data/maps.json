@@ -1,28 +1,40 @@
 [{
   "name": "Divinity's Reach",
-  "layers": [
-    [
-      {
-        "type": "grass",
-        "grid": {
-          "col": 0,
-          "row": 0
-        },
-        "size": {
-          "cols": 27,
-          "rows": 19
-        }
-      },{
-        "type": "water",
-        "grid": {
-          "col": 2,
-          "row": 3
-        },
-        "size": {
-          "cols": 2,
-          "rows": 2
-        }
+  "baseLayer": {
+    "type": "grass",
+    "grid": {
+      "col": 0,
+      "row": 0
+    },
+    "size": {
+      "cols": 27,
+      "rows": 19
+    }
+  },
+  "solids": [
+    {
+      "type": "water",
+      "grid": {
+        "col": 2,
+        "row": 3
+      },
+      "size": {
+        "cols": 2,
+        "rows": 2
       }
-    ]
+    }
+  ],
+  "nonSolids": [
+    {
+      "type": "bush",
+      "grid": {
+        "col": 20,
+        "row": 15
+      },
+      "size": {
+        "cols": 6,
+        "rows": 3
+      }
+    }
   ]
 }]

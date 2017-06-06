@@ -38,3 +38,11 @@ class Water extends Tile {
     this.walkable = false;
   }
 }
+
+class Bush extends Tile {
+  constructor() {
+    super('bush');
+
+    this.graphics.beginFill('brown');
+  }
+}

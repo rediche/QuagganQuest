@@ -23,12 +23,17 @@ function queueProgress(e) {
 function queueComplete(e) {
   //console.log("Queue Completed!");
   //console.log(game.queue.getResult('mapsJson')[0]);
-  initMap(game.queue.getResult('mapsJson')[0]); // TODO: Shouldn't be hardcoded like this
-  initPlayer();
-  game.stage.update(e);
+  game.level = 0;
+
+  startLevel(game.level);  
 
   /* Add tick listener */
   createjs.Ticker.addEventListener('tick', onTick);
+}
+
+function startLevel( level ) {
+  initMap(game.queue.getResult('mapsJson')[level]);
+  initPlayer();
 }
 
 function initPlayer() {
@@ -43,7 +48,7 @@ function initMap( settings ) {
 }
 
 function onTick(e) {
-  
+
   if (game.paused === true) {
     console.log("Game paused");
   } else {

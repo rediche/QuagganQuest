@@ -8,28 +8,35 @@ class Map extends Container {
     this.settings = settings;
     console.log("Constructing Map:", this.settings.name);
 
-    console.log(this.settings.layers[0]);
-    this.drawLayers(this.settings.layers);
+    // Draw Base Layer
+    this.drawTiles(settings.baseLayer);
+
+    // Draw solid layers
+    this.drawLayers(settings.solids);
+
+    // Draw non solid layers
+    this.drawLayers(settings.nonSolids);
+
+    //console.log(this.settings.layers[0]);
+    //this.drawLayers(this.settings.layers);
     //this.makeBaseTile('green');
+  }
+
+  drawTiles( layer ) {
+    let that = this;
+    for(let col = 0; col < layer.size.cols; col++) {
+      for(let row = 0; row < layer.size.rows; row++) {
+        let newTile = that.determineTileType(layer.type);
+        newTile.graphics.drawRect(0, 0, 32, 32);
+        newTile.setGridPosition(layer.grid.col + col, layer.grid.row + row);
+        that.addChild(newTile);
+      }
+    }
   }
 
   drawLayers( layers ) {
     layers.forEach(layer => {
-      this.drawLayer(layer);
-    });
-  }
-
-  drawLayer( layer ) {
-    let that = this;
-    layer.forEach(section => {
-      for(let col = 0; col < section.size.cols; col++) {
-        for(let row = 0; row < section.size.rows; row++) {
-          let newTile = that.determineTileType(section.type);
-          newTile.graphics.drawRect(0, 0, 32, 32);
-          newTile.setGridPosition(section.grid.col + col, section.grid.row + row);
-          that.addChild(newTile);
-        }
-      }
+      this.drawTiles(layer);
     });
   }
 
@@ -41,6 +48,9 @@ class Map extends Container {
         break;
       case 'water':
         tile = new Water();
+        break;
+      case 'bush':
+        tile = new Bush();
         break;
     }
 
