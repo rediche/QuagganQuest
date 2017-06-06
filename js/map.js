@@ -9,7 +9,7 @@ class Map extends Container {
     this.settings = settings;
 
     // Set initial state
-    this.speed = 2;
+    this.speed = 1;
     this.objects = [];
 
     console.log("Constructing Map:", this.settings.name);
@@ -102,28 +102,41 @@ class Map extends Container {
    * @param {Number} diffY 
    */
   canMoveTo(diffX, diffY) {
+    //console.log(diffX, diffY);
     // Kør gennem alle this.objects
     // Hvis de vil ramme diffX/diffY, så tjek om den er walkable
     let validPosition = true;
+    let player = game.player;
 
     // Somehow get object at x, y range and check against player position. 
 
-    return false //validPosition;
+    let left = Math.floor(player.x - 32 + diffX);
+    let right = Math.floor(player.x + 32 + diffX);
+    let top = Math.floor(player.y - 32 + diffY);
+    let bottom = Math.floor(player.y + 32 + diffY);
+
+    for (let x = left; x <= right; x++) {
+      for (let y = top; y <= bottom; y++) {
+        validPosition = validPosition && this.getObjectAt(x, y, diffX, diffY);
+      }
+    }
+
+
+    return validPosition;
   }
 
-  getObjectAt(x, y) {
-    let matches = this.objects.filter(object => {
-      return object.x === x;
+  getObjectAt(x, y, diffX, diffY) {
+    //console.log(this.objects);
+    let map = game.map.obj;
+
+    let match = this.objects.find(object => {
+      return object.x + diffX + map.x === x && object.y + diffY + map.y === y;
     });
 
-    
-    if (matches) {
-      //console.log(matches);
-      return matches.find(match => {
-        return match.y === y;
-      });
-    } else {
-      return;
+    if (match) {
+      return false;
     }
+
+    return true;
   }
 }
