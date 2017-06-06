@@ -13,6 +13,20 @@ let positionMixin = {
   },
 
   setGridPosition: function(col, row) {
+    this.gridCol = col;
+    this.gridRow = row;
     this.setPosition(col * 32, row * 32);
+  }
+};
+
+let hitTestMixin = {
+  hitTest: function(objA, objB) {
+    if ( objA.x >= objB.x + objB.width
+      || objA.x + objA.width <= objB.x
+      || objA.y >= objB.y + objB.height
+      || objA.y + objA.height <= objB.y ) {
+      return false;
+    }
+    return true;
   }
 };

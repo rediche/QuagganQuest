@@ -11,7 +11,7 @@
       "rows": 19
     }
   },
-  "solids": [
+  "objects": [
     {
       "type": "water",
       "grid": {
@@ -22,9 +22,7 @@
         "cols": 2,
         "rows": 2
       }
-    }
-  ],
-  "nonSolids": [
+    },
     {
       "type": "bush",
       "grid": {

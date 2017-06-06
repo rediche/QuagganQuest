@@ -2,50 +2,54 @@ class Map extends Container {
   constructor( settings ) {
     super();
 
-    // Include the position mixin
-    Object.assign(this, positionMixin);
+    // Add HitTest to this class
+    Object.assign(this, hitTestMixin);
 
     // Load parameters into the class
     this.settings = settings;
 
     // Set initial state
     this.speed = 2;
+    this.objects = [];
 
     console.log("Constructing Map:", this.settings.name);
 
     // Draw Floor of map
     this.drawTiles(settings.floor);
 
-    // Draw solid layers
-    this.drawLayers(settings.solids);
-
-    // Draw non solid layers
-    this.drawLayers(settings.nonSolids);
-
-    //console.log(this.settings.layers[0]);
-    //this.drawLayers(this.settings.layers);
-    //this.makeBaseTile('green');
+    // Draw objects on map
+    this.drawLayers(settings.objects);
   }
 
-  drawTiles( layer ) {
-    let that = this;
-    for(let col = 0; col < layer.size.cols; col++) {
-      for(let row = 0; row < layer.size.rows; row++) {
-        let newTile = that.determineTileType(layer.type);
+  drawTiles( layer, saveTiles = false ) {
+
+    for (let row = 0; row < layer.size.rows; row++) {
+
+      for (let col = 0; col < layer.size.cols; col++) {
+        let newTile = this.makeTileFromType(layer.type);
         newTile.graphics.drawRect(0, 0, 32, 32);
+        newTile.width = newTile.height = 32;
         newTile.setGridPosition(layer.grid.col + col, layer.grid.row + row);
-        that.addChild(newTile);
+        this.addChild(newTile);
+
+        if (saveTiles === true) {
+          this.objects.push(newTile);
+        }
       }
+
     }
+
+    console.log(this.objects);
+
   }
 
   drawLayers( layers ) {
     layers.forEach(layer => {
-      this.drawTiles(layer);
+      this.drawTiles(layer, true);
     });
   }
 
-  determineTileType( type ) {
+  makeTileFromType( type ) {
     let tile;
     switch ( type ) {
       case 'grass':
@@ -65,17 +69,66 @@ class Map extends Container {
   move( direction ) {
     switch (direction) {
       case 'up':
-        this.y = this.y - this.speed;
+        this.tryToMove(0, -this.speed);
         break;
       case 'down':
-        this.y = this.y + this.speed;
+        this.tryToMove(0, this.speed);
         break;
       case 'left':
-        this.x = this.x - this.speed;
+        this.tryToMove(-this.speed, 0);
         break;
       case 'right':
-        this.x = this.x + this.speed;
+        this.tryToMove(this.speed, 0);
         break;
+    }
+  }
+
+  tryToMove(diffX, diffY) {
+    let canvas = game.stage.canvas;
+
+    if (this.canMoveTo(diffX, diffY)) {
+      let newX = this.x + diffX;
+      let newY = this.y + diffY;
+
+      this.setPosition(newX, newY);
+    }
+    
+  }
+
+  /**
+   * Inspired by PETL
+   * Src: https://github.com/petlatkea/petersplayground/blob/master/js/game.js
+   * @param {Number} diffX 
+   * @param {Number} diffY 
+   */
+  canMoveTo(diffX, diffY) {
+    // Kør gennem alle this.objects
+    // Hvis de vil ramme diffX/diffY, så tjek om den er walkable
+    let validPosition = true;
+    let player = game.player;
+    console.log(player);
+    this.objects.forEach(object => {
+      if(this.hitTest(object, player)) {
+        console.log("touch");
+      }
+    });
+
+    return validPosition;
+  }
+
+  getObjectAt(x, y) {
+    let matches = this.objects.filter(object => {
+      return object.x === x;
+    });
+
+    
+    if (matches) {
+      //console.log(matches);
+      return matches.find(match => {
+        return match.y === y;
+      });
+    } else {
+      return;
     }
   }
 }

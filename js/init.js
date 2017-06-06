@@ -99,6 +99,8 @@ function startMap( map ) {
 
 function initPlayer() {
   game.player = new Player();
+  game.player.width = 32;
+  game.player.height = 32;
   game.player.setGridPosition(13, 9);
   game.stage.addChild(game.player);
 }
@@ -113,7 +115,7 @@ function onTick(e) {
   if (game.paused === true) {
     console.log("Game paused");
   } else {
-    console.log("Game running");
+    //console.log("Game running");
     moveMap( game.map.obj );
   }
 
