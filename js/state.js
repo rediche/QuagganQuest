@@ -8,7 +8,16 @@ let game = {
   queue: null,
   utility: null,
   player: null,
-  map: null,
-  level: null,
+  map: {
+    obj: null,
+    current: null
+  },
   paused: false
 };
+
+let keys = {
+  up: false,
+  down: false,
+  left: false,
+  right: false
+}

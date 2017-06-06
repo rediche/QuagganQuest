@@ -8,8 +8,8 @@ class Map extends Container {
     this.settings = settings;
     console.log("Constructing Map:", this.settings.name);
 
-    // Draw Base Layer
-    this.drawTiles(settings.baseLayer);
+    // Draw Floor of map
+    this.drawTiles(settings.floor);
 
     // Draw solid layers
     this.drawLayers(settings.solids);
@@ -42,7 +42,7 @@ class Map extends Container {
 
   determineTileType( type ) {
     let tile;
-    switch( type ) {
+    switch ( type ) {
       case 'grass':
         tile = new Grass();
         break;
@@ -56,4 +56,20 @@ class Map extends Container {
 
     return tile;
   }
+
+  /*move( direction ) {
+    switch (direction) {
+      case 'up':
+        this.y = this.y - 32;
+        break;
+      case 'down':
+        this.y = this.y + 32;
+        break;
+      case 'left':
+        this.x = this.x - 32;
+        break;
+      case 'right':
+        break;
+    }
+  }*/
 }

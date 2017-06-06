@@ -23,16 +23,16 @@ function queueProgress(e) {
 function queueComplete(e) {
   //console.log("Queue Completed!");
   //console.log(game.queue.getResult('mapsJson')[0]);
-  game.level = 0;
+  game.map.current = 0;
 
-  startLevel(game.level);  
+  startMap(game.map);  
 
   /* Add tick listener */
   createjs.Ticker.addEventListener('tick', onTick);
 }
 
-function startLevel( level ) {
-  initMap(game.queue.getResult('mapsJson')[level]);
+function startMap( map ) {
+  initMap(game.queue.getResult('mapsJson')[map.current]);
   initPlayer();
 }
 
@@ -43,8 +43,8 @@ function initPlayer() {
 }
 
 function initMap( settings ) {
-  game.map = new Map(settings);
-  game.stage.addChild(game.map);
+  game.map.obj = new Map(settings);
+  game.stage.addChild(game.map.obj);
 }
 
 function onTick(e) {

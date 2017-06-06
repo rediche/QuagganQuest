@@ -1,6 +1,6 @@
 [{
   "name": "Divinity's Reach",
-  "baseLayer": {
+  "floor": {
     "type": "grass",
     "grid": {
       "col": 0,
