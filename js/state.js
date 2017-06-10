@@ -5,6 +5,13 @@ const MANIFEST = [{
 
 let game = {
   stage: null,
+  view: {
+    current: 'map',
+    options: {
+      map: 'map',
+      combat: 'combat'
+    }
+  },
   queue: null,
   utility: null,
   player: null,

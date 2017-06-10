@@ -110,10 +110,24 @@ function initMap( settings ) {
   game.stage.addChild(game.map.obj);
 }
 
+function initArena() {
+  
+}
+
+function goIntoCombat() {
+  console.log("going into combat");
+  let view = game.view;
+  view.current = view.options.combat;
+
+  initArena();
+}
+
 function onTick(e) {
 
   if (game.paused === true) {
     console.log("Game paused");
+  } else if (game.view.current === game.view.options.combat) {
+    console.log("in combat");
   } else {
     //console.log("Game running");
     moveMap( game.map.obj );
