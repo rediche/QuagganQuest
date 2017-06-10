@@ -111,7 +111,10 @@ function initMap( settings ) {
 }
 
 function initArena() {
-  
+  let stage = game.stage;
+
+  game.arena = new Arena();
+  stage.addChild(game.arena);
 }
 
 function goIntoCombat() {
@@ -119,7 +122,25 @@ function goIntoCombat() {
   let view = game.view;
   view.current = view.options.combat;
 
+  let map = game.map.obj;
+  map.alpha = 0;
+
   initArena();
+}
+
+function goOutOfCombat() {
+  let stage = game.stage;
+
+  // Reset arena
+  stage.removeChild(game.arena);
+  game.arena = null;
+
+  // Show map again
+  let view = game.view;
+  view.current = view.options.map;
+
+  let map = game.map.obj;
+  map.alpha = 1;
 }
 
 function onTick(e) {

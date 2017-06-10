@@ -19,6 +19,7 @@ let game = {
     obj: null,
     current: null
   },
+  arena: null,
   paused: false
 };
 
