@@ -12,7 +12,7 @@ class Map extends Container {
     this.speed = 2;
     this.objects = [];
 
-    console.log("Constructing Map:", this.settings.name);
+    //console.log("Constructing Map:", this.settings.name);
 
     // Draw Floor of map
     this.drawTiles(settings.floor);
@@ -39,7 +39,7 @@ class Map extends Container {
 
     }
 
-    console.log(this.objects);
+    //console.log(this.objects);
 
   }
 
