@@ -104,7 +104,7 @@ class Map extends Container {
     let player = game.player;
 
     let match = this.objects.find(object => {
-      return object.touchesPlayer() === true;
+      return object.touchesPlayer(diffX, diffY) === true;
     });
 
     if (match) {

@@ -23,8 +23,10 @@ class Tile extends createjs.Shape {
 
   /**
    * Player is always in middle of screen. Check if this tile hits that spot.
+   * @param {Number} offsetX 
+   * @param {Number} offsetY 
    */
-  touchesPlayer() {
+  touchesPlayer(offsetX = 0, offsetY = 0) {
     let canvas = game.stage.canvas;
     let map = game.map.obj;
     let player = game.player;
@@ -33,8 +35,8 @@ class Tile extends createjs.Shape {
     // The map offset is needed, because the maps is a container of tiles,
     // so the tiles are relative position to the map and not global coordinates.
     // Simple Hit Detection. Overlap is not an issue.
-    let xHits = (this.x + map.x + this.width > player.x && this.x + map.x < player.x + player.width);
-    let yHits = (this.y + map.y + this.height > player.y && this.y + map.y < player.y + player.height);
+    let xHits = (this.x + map.x + offsetX + this.width > player.x && this.x + map.x + offsetX < player.x + player.width);
+    let yHits = (this.y + map.y + offsetY + this.height > player.y && this.y + map.y + offsetY < player.y + player.height);
 
     if (xHits && yHits) {
       return true;
