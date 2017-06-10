@@ -130,7 +130,7 @@ class Map extends Container {
     });
 
     if (match) {
-      return false;
+      return match.canWalkOn();
     }
 
     return true;
