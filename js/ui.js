@@ -16,10 +16,10 @@ class Button extends Container {
     createBackground() {
         let background = new createjs.Shape();
         background.graphics.beginFill('black');
-        background.graphics.drawRect(0, 0, 192, 64);
+        background.graphics.drawRect(0, 0, 128, 32);
 
-        background.width = 192;
-        background.height = 64;
+        background.width = 128;
+        background.height = 32;
 
         this.addChild(background);
 

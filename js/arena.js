@@ -44,9 +44,9 @@ class ArenaUI extends Container {
 
         let background = new createjs.Shape();
         background.graphics.beginFill('hotpink');
-        background.graphics.drawRect(0, 0, canvas.width, 128);
+        background.graphics.drawRect(0, 0, canvas.width, 64);
 
-        background.y = canvas.height - 128;
+        background.y = canvas.height - 64;
 
         this.addChild(background);
     }
@@ -58,7 +58,7 @@ class ArenaUI extends Container {
 
         for (let i = 0; i < this.amountOfDices; i++) {
             let dice = new ArenaUIDice();
-            dice.setPosition(32 + (64 + 32) * i, canvas.height - 128 + 32);
+            dice.setPosition(16 + (32 + 16) * i, canvas.height - 64 + 16);
             this.addChild(dice);
             this.dices.push(dice);
         }
@@ -69,7 +69,7 @@ class ArenaUI extends Container {
         let attackBtn = new AttackButton();
         console.log(attackBtn);
 
-        attackBtn.setPosition(this.amountOfDices * 64 * 2 + 32, canvas.height - 128 + 32);
+        attackBtn.setPosition(this.amountOfDices * 64 * 2 + 32, canvas.height - 64 + 16);
 
         this.addChild(attackBtn);
     }
