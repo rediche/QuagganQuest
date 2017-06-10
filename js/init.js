@@ -23,6 +23,8 @@ function queueProgress(e) {
 function queueComplete(e) {
   //console.log("Queue Completed!");
   //console.log(game.queue.getResult('mapsJson')[0]);
+  game.spritesheets.dices.basic = new createjs.SpriteSheet(game.queue.getResult('diceSpriteSheetJson'));
+
   game.map.current = 0;
 
   startMap(game.map);  
@@ -148,7 +150,7 @@ function onTick(e) {
   if (game.paused === true) {
     console.log("Game paused");
   } else if (game.view.current === game.view.options.combat) {
-    console.log("in combat");
+    //console.log("in combat");
   } else {
     //console.log("Game running");
     moveMap( game.map.obj );

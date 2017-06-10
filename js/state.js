@@ -1,6 +1,9 @@
 const MANIFEST = [{
   "id": "mapsJson",
   "src": "data/maps.json"
+},{
+  "id": "diceSpriteSheetJson",
+  "src": "data/diceSpriteSheet.json"
 }];
 
 let game = {
@@ -10,6 +13,11 @@ let game = {
     options: {
       map: 'map',
       combat: 'combat'
+    }
+  },
+  spritesheets: {
+    dices: {
+      basic: null
     }
   },
   queue: null,

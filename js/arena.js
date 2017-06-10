@@ -15,6 +15,8 @@ class Arena extends Container {
         background.graphics.beginFill('lightblue');
         background.graphics.drawRect(0, 0, canvas.width, canvas.height);
 
+        console.log(background);
+
         this.addChild(background);
     }
 
@@ -82,30 +84,19 @@ class ArenaUIDice extends Container {
 
         console.log("Making a dice...");
 
-        this.createBackground();
+        //this.createBackground();
         this.createDiceTexture();
-    }
 
-    createBackground() {
-        let background = new createjs.Shape();
-
-        background.graphics.beginFill('black');
-        background.graphics.drawRect(0, 0, 64, 64);
-
-        background.alpha = 0.25;
-
-        this.addChild(background);
+        this.addEventListener('click', this.roll);
     }
 
     createDiceTexture() {
-        let texture = new createjs.Shape();
-
-        texture.graphics.beginFill('brown');
-        texture.graphics.drawRect(0, 0, 48, 48);
-
-        texture.x = 8;
-        texture.y = 8;
+        let texture = new createjs.Sprite(game.spritesheets.dices.basic, "roll");
 
         this.addChild(texture);
+    }
+
+    roll() {
+        console.log(game.utility.generateRandomNumber(1, 6));
     }
 }
