@@ -101,32 +101,10 @@ class Map extends Container {
    * @param {Number} diffY 
    */
   canMoveTo(diffX, diffY) {
-    // Kør gennem alle this.objects
-    // Hvis de vil ramme diffX/diffY, så tjek om den er walkable
-    let validPosition = true;
     let player = game.player;
 
-    // Somehow get object at x, y range and check against player position. 
-
-    let left = Math.floor(player.x - 32 + diffX);
-    let right = Math.floor(player.x + 32 + diffX);
-    let top = Math.floor(player.y - 32 + diffY);
-    let bottom = Math.floor(player.y + 32 + diffY);
-
-    for (let x = left; x <= right; x++) {
-      for (let y = top; y <= bottom; y++) {
-        validPosition = validPosition && this.getObjectAt(x, y, diffX, diffY);
-      }
-    }
-
-    return validPosition;
-  }
-
-  getObjectAt(x, y, diffX, diffY) {
-    let map = game.map.obj;
-
     let match = this.objects.find(object => {
-      return object.x + diffX + map.x === x && object.y + diffY + map.y === y;
+      return object.touchesPlayer() === true;
     });
 
     if (match) {
