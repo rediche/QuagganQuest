@@ -91,6 +91,12 @@ class Map extends Container {
       let newY = this.y + diffY;
 
       this.setPosition(newX, newY);
+
+      let match = this.findObjectTouchingPlayer();
+
+      if (match) {
+        match.walkOn();
+      }
     }
   }
 
@@ -103,14 +109,18 @@ class Map extends Container {
   canMoveTo(diffX, diffY) {
     let player = game.player;
 
-    let match = this.objects.find(object => {
-      return object.touchesPlayer(diffX, diffY) === true;
-    });
+    let match = this.findObjectTouchingPlayer(diffX, diffY);
 
     if (match) {
       return match.canWalkOn();
     }
 
     return true;
+  }
+
+  findObjectTouchingPlayer(offsetX = 0, offsetY = 0) {
+    return this.objects.find(object => {
+      return object.touchesPlayer(offsetX, offsetY) === true;
+    });
   }
 }

@@ -68,5 +68,15 @@ class Bush extends Tile {
     super('bush');
 
     this.graphics.beginFill('brown');
+
+    if (game.utility.generateRandomNumber(1, 100) > 50) {
+      this.hasEnemy = true;
+    }
+  }
+
+  walkOn() {
+    if (this.hasEnemy === true) {
+      console.log("oh shit! Enemy incoming!");
+    }
   }
 }
