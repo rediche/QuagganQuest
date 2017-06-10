@@ -34,6 +34,7 @@ class ArenaUI extends Container {
 
         this.createBackground();
         this.createDices();
+        this.createAttackButton();
     }
 
     createBackground() {
@@ -41,21 +42,34 @@ class ArenaUI extends Container {
 
         let background = new createjs.Shape();
         background.graphics.beginFill('hotpink');
-        background.graphics.drawRect(0, 0, canvas.width, canvas.height / 4);
+        background.graphics.drawRect(0, 0, canvas.width, 128);
 
-        background.y = canvas.height / 4 * 3;
+        background.y = canvas.height - 128;
 
         this.addChild(background);
     }
 
     createDices() {
+        let canvas = game.stage.canvas;
+
         this.dices = [];
 
         for (let i = 0; i < this.amountOfDices; i++) {
             let dice = new ArenaUIDice();
+            dice.setPosition(32 + (64 + 32) * i, canvas.height - 128 + 32);
             this.addChild(dice);
             this.dices.push(dice);
         }
+    }
+
+    createAttackButton() {
+        let canvas = game.stage.canvas;
+        let attackBtn = new AttackButton();
+        console.log(attackBtn);
+
+        attackBtn.setPosition(this.amountOfDices * 64 * 2 + 32, canvas.height - 128 + 32);
+
+        this.addChild(attackBtn);
     }
 }
 
@@ -63,6 +77,35 @@ class ArenaUIDice extends Container {
     constructor() {
         super();
 
+        // Add PositionMixin to this class
+        Object.assign(this, positionMixin);
+
         console.log("Making a dice...");
+
+        this.createBackground();
+        this.createDiceTexture();
+    }
+
+    createBackground() {
+        let background = new createjs.Shape();
+
+        background.graphics.beginFill('black');
+        background.graphics.drawRect(0, 0, 64, 64);
+
+        background.alpha = 0.25;
+
+        this.addChild(background);
+    }
+
+    createDiceTexture() {
+        let texture = new createjs.Shape();
+
+        texture.graphics.beginFill('brown');
+        texture.graphics.drawRect(0, 0, 48, 48);
+
+        texture.x = 8;
+        texture.y = 8;
+
+        this.addChild(texture);
     }
 }
