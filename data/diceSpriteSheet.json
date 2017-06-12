@@ -1,6 +1,6 @@
 {
   "images": ["img/basic-dice.png"],
-  "framerate": 6,
+  "framerate": 4,
   "frames": {
     "width": 32,
     "height": 32,

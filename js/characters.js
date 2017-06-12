@@ -35,6 +35,12 @@ class Character extends Container {
     this.accumulatedDmg = newAccumulatedDmg;
     //console.log("New accumulated dmg", this.accumulatedDmg);
   }
+
+  resetDices() {
+    this.dices.forEach(dice => {
+      dice.thrown = false;
+    });
+  }
 }
 
 class Player extends Character {
@@ -45,6 +51,6 @@ class Player extends Character {
 
 class Enemy extends Character {
   constructor() {
-    super({color: 'blue', hp: 5});
+    super({color: 'blue', hp: 20});
   }
 }

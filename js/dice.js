@@ -3,6 +3,7 @@ class Dice {
     this.min = min;
     this.max = max;
     this.skin = skin;
+    this.thrown = false;
   }
 
   roll() {

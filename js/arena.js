@@ -26,6 +26,7 @@ class Arena extends Container {
         let arenaUI = new ArenaUI();
 
         this.addChild(arenaUI);
+        this.ui = arenaUI;
     }
 
     createEnemy() {
@@ -62,17 +63,37 @@ class Arena extends Container {
     nextTurn() {
         switch (this.turn) {
             case this.turns.player:
+                console.log("Enemys turn");
                 this.turn = this.turns.enemy;
-                // TODO: add enemy attacking
+                game.arena.enemy.resetDices();
+                this.NPCTurn(this.enemy);
                 break;
+
             case this.turns.enemy:
+                console.log("Players turn");
                 this.turn = this.turns.player;
+                game.player.canAttack = true;
+                game.player.resetDices();
+                game.arena.ui.rollDices();
                 break;
         }
     }
 
+    NPCTurn(enemy) {
+        // TODO:  Restucture enemy attack logic to enemy class?
+        let roll = enemy.dices[0].roll();
+
+        if (roll === 1) {
+            console.log('Roll failed');
+            game.arena.nextTurn();
+        } else {
+            enemy.setAccumulatedDmg(enemy.accumulatedDmg + roll);
+            this.attack(enemy, game.player);
+        }
+    }
+
     attack(attacker, target) {
-        console.log(attacker, target);
+        //console.log(attacker, target);
         let that = this;
         let attackerInitialX = attacker.x;
 
@@ -94,12 +115,12 @@ class Arena extends Container {
                 x: attackerInitialX
             }, 500, createjs.Ease.elasticOut)
             .call(function() {
+                // TODO: Reset thrown dices
+
                 if (target.hp <= 0) {
                     console.log("Target is dead!");
 
                     if (that.turn === that.turns.player) {
-                        game.player.canAttack = true;
-
                         // TODO: Play win animation and then go back to map
                     } else {
                         // TODO: Add respawn screen (GAME OVER)
@@ -149,6 +170,12 @@ class ArenaUI extends Container {
         }
     }
 
+    rollDices() {
+        this.dices.forEach(dice => {
+            dice.changeDiceFace(99);
+        });
+    }
+
     createAttackButton() {
         let canvas = game.stage.canvas;
         let attackBtn = new AttackButton();
@@ -167,7 +194,7 @@ class ArenaUIDice extends Container {
         // Add PositionMixin to this class
         Object.assign(this, positionMixin);
 
-        console.log("Making a dice...");
+        //console.log("Making a dice...");
 
         // Set defaults
         this.dice = dice;
@@ -214,15 +241,17 @@ class ArenaUIDice extends Container {
             break;
         }
 
-        return this.diceTexture.gotoAndPlay(animation);
+        this.diceTexture.gotoAndPlay(animation);
     }
 
     roll(e) {
         let UIDice = e.target.parent;
 
-        if (UIDice.thrown === false) {
+        if (UIDice.dice.thrown === false) {
             let player = game.player;
             let roll = UIDice.dice.roll();
+
+            console.log("Roll", roll);
 
             if (roll === 1) {
                 console.log('Roll failed');
@@ -230,7 +259,7 @@ class ArenaUIDice extends Container {
             } else {
                 UIDice.changeDiceFace(roll); // "this" doesn't work. Use event instead
                 player.setAccumulatedDmg(player.accumulatedDmg + roll);
-                UIDice.thrown = true;
+                UIDice.dice.thrown = true;
             }
 
             
