@@ -135,7 +135,7 @@ function goIntoCombat() {
   player.mapY = player.y; 
 
   player.x = 32;
-  player.y = canvas.height - 128;
+  player.y = canvas.height - 96;
 
   initArena();
 }

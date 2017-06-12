@@ -14,7 +14,7 @@ class Arena extends Container {
 
         let background = new createjs.Shape();
 
-        background.graphics.beginFill('lightblue');
+        background.graphics.beginBitmapFill(game.queue.getResult('grassyAreaImg'));
         background.graphics.drawRect(0, 0, canvas.width, canvas.height);
 
         //console.log(background);
@@ -34,7 +34,7 @@ class Arena extends Container {
         let enemy = new Enemy();
 
         enemy.x = canvas.width - 32 - 32;
-        enemy.y = canvas.height - 128;
+        enemy.y = canvas.height - 96;
 
         this.addChild(enemy);
         this.enemy = enemy;
@@ -140,7 +140,7 @@ class ArenaUI extends Container {
         //console.log("Making ArenaUI...");
         this.amountOfDices = game.player.dices.length;
 
-        this.createBackground();
+        //this.createBackground();
         this.createDices();
         this.createAttackButton();
     }
@@ -164,7 +164,7 @@ class ArenaUI extends Container {
 
         for (let i = 0; i < this.amountOfDices; i++) {
             let dice = new ArenaUIDice(game.player.dices[i]);
-            dice.setPosition(16 + (32 + 16) * i, canvas.height - 64 + 16);
+            dice.setPosition(8 + (32 + 16) * i, canvas.height - 64 + 24);
             this.addChild(dice);
             this.dices.push(dice);
         }
@@ -182,7 +182,7 @@ class ArenaUI extends Container {
         //console.log(attackBtn);
 
         //attackBtn.setPosition(this.amountOfDices * 64 * 2 + 32, canvas.height - 64 + 16);
-        attackBtn.setPosition(canvas.width - 128 - 16, canvas.height - 64 + 16);
+        attackBtn.setPosition(canvas.width - 128 - 8, canvas.height - 64 + 24);
         this.addChild(attackBtn);
     }
 }

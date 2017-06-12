@@ -4,6 +4,9 @@ const MANIFEST = [{
 },{
   "id": "diceSpriteSheetJson",
   "src": "data/diceSpriteSheet.json"
+},{
+  "id": "grassyAreaImg",
+  "src": "img/backgrounds/grassy-area.png"
 }];
 
 let game = {
