@@ -1,5 +1,5 @@
 class Character extends Container {
-  constructor() {
+  constructor(config = {}) {
     super();
 
     //console.log('Making character');
@@ -13,7 +13,11 @@ class Character extends Container {
       new Dice(1, 6)
     ];
 
-    this.makeBody('white');
+    if (config.color) {
+      this.makeBody(config.color);
+    } else {
+      this.makeBody('white');
+    }
   }
 
   makeBody(color) {
@@ -41,6 +45,6 @@ class Player extends Character {
 
 class Enemy extends Character {
   constructor() {
-    super();
+    super({color: 'blue'});
   }
 }

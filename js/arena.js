@@ -5,6 +5,7 @@ class Arena extends Container {
         //console.log("Starting arena...");
         this.createBackground();
         this.createArenaUI();
+        this.createEnemy();
         this.setTurn();
     }
 
@@ -27,6 +28,17 @@ class Arena extends Container {
         this.addChild(arenaUI);
     }
 
+    createEnemy() {
+        let canvas = game.stage.canvas;
+        let enemy = new Enemy();
+
+        enemy.x = canvas.width - 128;
+        enemy.y = canvas.height - 190;
+
+        this.addChild(enemy);
+        this.enemy = enemy;
+    }
+
     setTurn(who = 'player') {
         let player = game.player;
 
@@ -47,24 +59,6 @@ class Arena extends Container {
         }
     }
 
-}
-
-class ArenaCharacters extends Container {
-    constructor() {
-        super();
-
-        this.createCharacter();
-    }
-
-    createCharacter() {
-        let character = new createjs.Shape();
-
-        character.graphics.beginFill('black');
-        character.graphics.drawRect(0, 0, 32, 64);
-
-        this.addChild(character);
-        this.character = character;
-    }
 }
 
 class ArenaUI extends Container {
