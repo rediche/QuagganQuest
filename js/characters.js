@@ -52,5 +52,15 @@ class Player extends Character {
 class Enemy extends Character {
   constructor() {
     super({color: 'blue', hp: 20});
+
+    this.dmgLimit = 10;
+  }
+
+  wantsToThrowDice() {
+    if (this.accumulatedDmg < this.dmgLimit) {
+      return true;
+    }
+
+    return false;
   }
 }

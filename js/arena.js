@@ -79,15 +79,43 @@ class Arena extends Container {
         }
     }
 
-    NPCTurn(enemy) {
-        // TODO:  Restucture enemy attack logic to enemy class?
-        let roll = enemy.dices[0].roll();
+    /*NPCThrowDice(enemy, index = 0) {
+        let roll = enemy.dices[index].roll();
+        enemy.setAccumulatedDmg(enemy.accumulatedDmg + roll);
 
         if (roll === 1) {
-            console.log('Roll failed');
+            console.log('Enemy Roll failed');
             game.arena.nextTurn();
+        } else if (enemy.wantsToAttack()) {
+            NPCThrowDice(enemy, index++);
         } else {
-            enemy.setAccumulatedDmg(enemy.accumulatedDmg + roll);
+            return 
+        }
+    }*/
+
+    NPCTurn(enemy) {
+        let rollFailed = false;
+
+        for (let i = 0; i < enemy.dices.length; i++) {
+            if (enemy.wantsToThrowDice()) {
+                let roll = enemy.dices[i].roll();
+                console.log("Enemy Roll", roll);
+                if (roll === 1) {
+                    rollFailed = true;
+                } else {
+                    enemy.setAccumulatedDmg(enemy.accumulatedDmg + roll);
+                }
+            } else {
+                console.log('Enemy dont want to throw another dice');
+            }
+        }
+
+        if (rollFailed === true) {
+            console.log('Enemy Roll failed');
+            game.arena.nextTurn();
+        } else if (enemy.wantsToThrowDice()) { // Lets add some nice recursion, in case enemy still wants to throw
+            this.NPCTurn(enemy);
+        } else {
             this.attack(enemy, game.player);
         }
     }
@@ -116,6 +144,7 @@ class Arena extends Container {
             }, 500, createjs.Ease.elasticOut)
             .call(function() {
                 // TODO: Reset thrown dices
+                attacker.setAccumulatedDmg(0);
 
                 if (target.hp <= 0) {
                     console.log("Target is dead!");
