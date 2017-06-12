@@ -2,7 +2,7 @@ class Arena extends Container {
     constructor() {
         super();
 
-        console.log("Starting arena...");
+        //console.log("Starting arena...");
         this.createBackground();
         this.createArenaUI();
     }
@@ -15,7 +15,7 @@ class Arena extends Container {
         background.graphics.beginFill('lightblue');
         background.graphics.drawRect(0, 0, canvas.width, canvas.height);
 
-        console.log(background);
+        //console.log(background);
 
         this.addChild(background);
     }
@@ -25,13 +25,35 @@ class Arena extends Container {
 
         this.addChild(arenaUI);
     }
+
+    createCharacters() {
+        
+    }
+}
+
+class ArenaCharacters extends Container {
+    constructor() {
+        super();
+
+        this.createCharacter();
+    }
+
+    createCharacter() {
+        let character = new createjs.Shape();
+
+        character.graphics.beginFill('black');
+        character.graphics.drawRect(0, 0, 32, 64);
+
+        this.addChild(character);
+        this.character = character;
+    }
 }
 
 class ArenaUI extends Container {
     constructor() {
         super();
 
-        console.log("Making ArenaUI...");
+        //console.log("Making ArenaUI...");
         this.amountOfDices = 2;
 
         this.createBackground();
@@ -67,7 +89,7 @@ class ArenaUI extends Container {
     createAttackButton() {
         let canvas = game.stage.canvas;
         let attackBtn = new AttackButton();
-        console.log(attackBtn);
+        //console.log(attackBtn);
 
         attackBtn.setPosition(this.amountOfDices * 64 * 2 + 32, canvas.height - 64 + 16);
 
@@ -84,6 +106,8 @@ class ArenaUIDice extends Container {
 
         console.log("Making a dice...");
 
+        // Set defaults
+
         //this.createBackground();
         this.createDiceTexture();
 
@@ -94,9 +118,46 @@ class ArenaUIDice extends Container {
         let texture = new createjs.Sprite(game.spritesheets.dices.basic, "roll");
 
         this.addChild(texture);
+        this.dice = texture;
     }
 
-    roll() {
-        console.log(game.utility.generateRandomNumber(1, 6));
+    changeDiceFace(face) {
+        let animation = null;
+
+        switch (face) {
+            case 0: 
+                animation = 'all';
+            break;
+            case 1:
+                animation = 'one';
+            break;
+            case 2:
+                animation = 'two';
+            break;
+            case 3:
+                animation = 'three';
+            break;
+            case 4:
+                animation = 'four';
+            break;
+            case 5:
+                animation = 'five';
+            break;
+            case 6:
+                animation = 'six';
+            break;
+            case 99:
+                animation = 'roll';
+            break;
+        }
+
+        return this.dice.gotoAndPlay(animation);
+    }
+
+    roll(e) {
+        let roll = game.utility.generateRandomNumber(1, 6);
+        e.target.parent.changeDiceFace(roll); // "this" doesn't work. Use event instead
+
+        return roll;
     }
 }
