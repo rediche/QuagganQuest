@@ -59,6 +59,57 @@ class Arena extends Container {
         }
     }
 
+    nextTurn() {
+        switch (this.turn) {
+            case this.turns.player:
+                this.turn = this.turns.enemy;
+                // TODO: add enemy attacking
+                break;
+            case this.turns.enemy:
+                this.turn = this.turns.player;
+                break;
+        }
+    }
+
+    attack(attacker, target) {
+        console.log(attacker, target);
+        let that = this;
+        let attackerInitialX = attacker.x;
+
+        createjs.Tween.get(attacker)
+            .to({
+                x: target.x + attacker.width / 2 // TODO: Should be minus attacker width for player.
+            }, 500, createjs.Ease.elasticOut)
+            .call(function() {
+                console.log("Target HP", target.hp);
+                target.setHP(target.hp - attacker.accumulatedDmg);
+                console.log("Target New HP", target.hp);
+
+                // TODO: Make animation showing HP being removed
+                
+                target.setAccumulatedDmg(0);
+            })
+            .wait(1000)
+            .to({
+                x: attackerInitialX
+            }, 500, createjs.Ease.elasticOut)
+            .call(function() {
+                if (target.hp <= 0) {
+                    console.log("Target is dead!");
+
+                    if (that.turn === that.turns.player) {
+                        game.player.canAttack = true;
+
+                        // TODO: Play win animation and then go back to map
+                    } else {
+                        // TODO: Add respawn screen (GAME OVER)
+                    }
+                } else {
+                    that.nextTurn();
+                }
+            });
+    }
+
 }
 
 class ArenaUI extends Container {
@@ -122,9 +173,7 @@ class ArenaUIDice extends Container {
         this.dice = dice;
         this.thrown = false;
 
-        //this.createBackground();
         this.createDiceTexture();
-
         this.addEventListener('click', this.roll);
     }
 
@@ -175,10 +224,16 @@ class ArenaUIDice extends Container {
             let player = game.player;
             let roll = UIDice.dice.roll();
 
-            UIDice.changeDiceFace(roll); // "this" doesn't work. Use event instead
-            player.setAccumulatedDmg(roll);
+            if (roll === 1) {
+                console.log('Roll failed');
+                game.arena.nextTurn();
+            } else {
+                UIDice.changeDiceFace(roll); // "this" doesn't work. Use event instead
+                player.setAccumulatedDmg(player.accumulatedDmg + roll);
+                UIDice.thrown = true;
+            }
 
-            UIDice.thrown = true;
+            
         } else {
             console.log('This dice has already been thrown');
         }

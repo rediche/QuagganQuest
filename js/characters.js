@@ -4,7 +4,7 @@ class Character extends Container {
 
     //console.log('Making character');
 
-    this.hp = 20;
+    this.hp = config.hp || 20;
     this.width = 32;
     this.height = 32;
     this.accumulatedDmg = 0;
@@ -27,13 +27,13 @@ class Character extends Container {
     this.addChild(body);
   }
 
-  setAccumulatedDmg(addToDmg) {
-    this.accumulatedDmg = this.accumulatedDmg + addToDmg;
-    console.log("New accumulated dmg", this.accumulatedDmg);
+  setHP(newHP) {
+    this.hp = newHP;
   }
 
-  resetAccumulatedDmg() {
-    this.accumulatedDmg = 0;
+  setAccumulatedDmg(newAccumulatedDmg) {
+    this.accumulatedDmg = newAccumulatedDmg;
+    //console.log("New accumulated dmg", this.accumulatedDmg);
   }
 }
 
@@ -45,6 +45,6 @@ class Player extends Character {
 
 class Enemy extends Character {
   constructor() {
-    super({color: 'blue'});
+    super({color: 'blue', hp: 5});
   }
 }

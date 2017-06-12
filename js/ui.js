@@ -52,7 +52,7 @@ class AttackButton extends Button {
     constructor() {
         super('ATTACK');
 
-        console.log('Making attack button...');
+        //console.log('Making attack button...');
     }
 
     onClick(e) {
@@ -61,7 +61,7 @@ class AttackButton extends Button {
         if (game.player.canAttack === true) {
             console.log("ATTACK!");
             game.player.canAttack = false;
-            // TODO: Add attack animation
+            game.arena.attack(game.player, game.arena.enemy);
         } else {
             console.log("You can't attack right now.");
         }
