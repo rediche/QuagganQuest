@@ -56,7 +56,14 @@ class AttackButton extends Button {
     }
 
     onClick(e) {
-        console.log("ATTACK!");
+        let player = game.player;
+
+        if (game.player.canAttack === true) {
+            console.log("ATTACK!");
+            game.player.canAttack = false;
+        } else {
+            console.log("You can't attack right now.");
+        }
     }
 }
 

@@ -101,8 +101,6 @@ function startMap( map ) {
 
 function initPlayer() {
   game.player = new Player();
-  game.player.width = 32;
-  game.player.height = 32;
   game.player.setGridPosition(13, 9);
   game.stage.addChild(game.player);
 }
@@ -117,31 +115,47 @@ function initArena() {
 
   game.arena = new Arena();
   stage.addChild(game.arena);
+
+  game.utility.putOnTopOfStage(game.player, game.stage);
 }
 
 function goIntoCombat() {
   console.log("going into combat");
+  let canvas = game.stage.canvas;
+  let player = game.player;
+  let map = game.map.obj;
   let view = game.view;
+
   view.current = view.options.combat;
 
-  let map = game.map.obj;
   map.alpha = 0;
+
+  // Save player X,Y for when going back onto map
+  player.mapX = player.x;
+  player.mapY = player.y; 
+
+  player.x = 64;
+  player.y = canvas.height - 190;
 
   initArena();
 }
 
 function goOutOfCombat() {
   let stage = game.stage;
+  let player = game.player;
+  let view = game.view;
+  let map = game.map.obj;
 
   // Reset arena
   stage.removeChild(game.arena);
   game.arena = null;
 
-  // Show map again
-  let view = game.view;
-  view.current = view.options.map;
+  // Put player back in original X,Y
+  player.x = player.mapX;
+  player.y = player.mapY;
 
-  let map = game.map.obj;
+  // Show map again
+  view.current = view.options.map;
   map.alpha = 1;
 }
 

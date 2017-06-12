@@ -5,6 +5,7 @@ class Arena extends Container {
         //console.log("Starting arena...");
         this.createBackground();
         this.createArenaUI();
+        this.setTurn();
     }
 
     createBackground() {
@@ -26,9 +27,26 @@ class Arena extends Container {
         this.addChild(arenaUI);
     }
 
-    createCharacters() {
-        
+    setTurn(who = 'player') {
+        let player = game.player;
+
+        if (this.turns === undefined) {
+            // Set players turn
+            this.turns = {
+                player: 'player',
+                enemy: 'enemy'
+            };
+        } 
+
+        this.turn = who;
+
+        if (this.turn === this.turns.player) {
+            player.canAttack = true;
+        } else {
+            player.canAttack = false;
+        }
     }
+
 }
 
 class ArenaCharacters extends Container {
@@ -54,7 +72,7 @@ class ArenaUI extends Container {
         super();
 
         //console.log("Making ArenaUI...");
-        this.amountOfDices = 2;
+        this.amountOfDices = game.player.dices.length;
 
         this.createBackground();
         this.createDices();
@@ -79,7 +97,7 @@ class ArenaUI extends Container {
         this.dices = [];
 
         for (let i = 0; i < this.amountOfDices; i++) {
-            let dice = new ArenaUIDice();
+            let dice = new ArenaUIDice(game.player.dices[i]);
             dice.setPosition(16 + (32 + 16) * i, canvas.height - 64 + 16);
             this.addChild(dice);
             this.dices.push(dice);
@@ -98,7 +116,7 @@ class ArenaUI extends Container {
 }
 
 class ArenaUIDice extends Container {
-    constructor() {
+    constructor(dice) {
         super();
 
         // Add PositionMixin to this class
@@ -107,6 +125,8 @@ class ArenaUIDice extends Container {
         console.log("Making a dice...");
 
         // Set defaults
+        this.dice = dice;
+        this.thrown = false;
 
         //this.createBackground();
         this.createDiceTexture();
@@ -118,7 +138,7 @@ class ArenaUIDice extends Container {
         let texture = new createjs.Sprite(game.spritesheets.dices.basic, "roll");
 
         this.addChild(texture);
-        this.dice = texture;
+        this.diceTexture = texture;
     }
 
     changeDiceFace(face) {
@@ -151,13 +171,23 @@ class ArenaUIDice extends Container {
             break;
         }
 
-        return this.dice.gotoAndPlay(animation);
+        return this.diceTexture.gotoAndPlay(animation);
     }
 
     roll(e) {
-        let roll = game.utility.generateRandomNumber(1, 6);
-        e.target.parent.changeDiceFace(roll); // "this" doesn't work. Use event instead
+        let UIDice = e.target.parent;
 
-        return roll;
+        if (UIDice.thrown === false) {
+            let player = game.player;
+            let roll = UIDice.dice.roll();
+
+            UIDice.changeDiceFace(roll); // "this" doesn't work. Use event instead
+            player.setAccumulatedDmg(roll);
+
+            UIDice.thrown = true;
+        } else {
+            console.log('This dice has already been thrown');
+        }
+        
     }
 }
