@@ -33,8 +33,8 @@ class Arena extends Container {
         let canvas = game.stage.canvas;
         let enemy = new Enemy();
 
-        enemy.x = canvas.width - 128;
-        enemy.y = canvas.height - 190;
+        enemy.x = canvas.width - 32 - 32;
+        enemy.y = canvas.height - 128;
 
         this.addChild(enemy);
         this.enemy = enemy;
@@ -181,8 +181,8 @@ class ArenaUI extends Container {
         let attackBtn = new AttackButton();
         //console.log(attackBtn);
 
-        attackBtn.setPosition(this.amountOfDices * 64 * 2 + 32, canvas.height - 64 + 16);
-
+        //attackBtn.setPosition(this.amountOfDices * 64 * 2 + 32, canvas.height - 64 + 16);
+        attackBtn.setPosition(canvas.width - 128 - 16, canvas.height - 64 + 16);
         this.addChild(attackBtn);
     }
 }

@@ -26,8 +26,8 @@
     {
       "type": "bush",
       "grid": {
-        "col": 20,
-        "row": 15
+        "col": 10,
+        "row": 7
       },
       "size": {
         "cols": 6,

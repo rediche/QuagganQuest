@@ -101,7 +101,7 @@ function startMap( map ) {
 
 function initPlayer() {
   game.player = new Player();
-  game.player.setGridPosition(13, 9);
+  game.player.setGridPosition(6, 4);
   game.stage.addChild(game.player);
 }
 
@@ -134,8 +134,8 @@ function goIntoCombat() {
   player.mapX = player.x;
   player.mapY = player.y; 
 
-  player.x = 64;
-  player.y = canvas.height - 190;
+  player.x = 32;
+  player.y = canvas.height - 128;
 
   initArena();
 }
