@@ -11,7 +11,10 @@ class Map extends Container {
     // Set initial state
     this.speed = 2;
     this.objects = [];
-    this.backgroundMusicSong = 'openWorldMusic'
+    this.backgroundMusicSong = 'openWorldMusic';
+
+    this.width = settings.floor.size.cols * 32;
+    this.height = settings.floor.size.rows * 32;
 
     //console.log("Constructing Map:", this.settings.name);
 
@@ -97,18 +100,33 @@ class Map extends Container {
   tryToMove(diffX, diffY) {
     let canvas = game.stage.canvas;
 
-    if (this.canMoveTo(diffX, diffY)) {
-      let newX = this.x + diffX;
-      let newY = this.y + diffY;
+    if (!this.hitMapBounds(diffX, diffY)) {
+      if (this.canMoveTo(diffX, diffY)) {
+        let newX = this.x + diffX;
+        let newY = this.y + diffY;
 
-      this.setPosition(newX, newY);
+        this.setPosition(newX, newY);
 
-      let match = this.findObjectTouchingPlayer();
+        let match = this.findObjectTouchingPlayer();
 
-      if (match) {
-        match.walkOn();
+        if (match) {
+          match.walkOn();
+        }
       }
     }
+  }
+
+  hitMapBounds(diffX, diffY) {
+    let player = game.player;
+    if (this.x + diffX > player.x || this.x + this.width + diffX < player.x + player.width) {
+      return true;
+    } 
+
+    if (this.y + diffY > player.y || this.y + this.height + diffY < player.y + player.height) {
+      return true;
+    }
+
+    return false;
   }
 
   /**
