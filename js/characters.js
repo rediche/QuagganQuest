@@ -12,6 +12,7 @@ class Character extends Container {
       new Dice(1, 6),
       new Dice(1, 6)
     ];
+    this.attackSound = 'banditAttackSound';
 
     if (config.color) {
       this.makeBody(config.color);
@@ -41,12 +42,22 @@ class Character extends Container {
       dice.thrown = false;
     });
   }
+
+  playAttackSound() {
+    // Inherited in subclasses
+    let attackSound = createjs.Sound.play(this.attackSound);
+    attackSound.setVolume(0.1);
+    attackSound.play();
+  }
 }
 
 class Player extends Character {
   constructor() {
     super();
+
+    this.attackSound = 'quagganCooSound';
   }
+
 }
 
 class Enemy extends Character {

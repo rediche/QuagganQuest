@@ -126,6 +126,9 @@ class Arena extends Container {
         let attackerInitialX = attacker.x;
 
         createjs.Tween.get(attacker)
+            .call(function() {
+                attacker.playAttackSound();
+            })
             .to({
                 x: target.x + attacker.width / 2 // TODO: Should be minus attacker width for player.
             }, 500, createjs.Ease.elasticOut)

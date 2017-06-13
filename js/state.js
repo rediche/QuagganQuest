@@ -7,6 +7,15 @@ const MANIFEST = [{
 },{
   "id": "grassyAreaImg",
   "src": "img/backgrounds/grassy-area.png"
+},{
+  "id": "quagganAttackSound",
+  "src": "sounds/quaggan-attack.mp3"
+},{
+  "id": "quagganCooSound",
+  "src": "sounds/quaggan-coo.mp3"
+},{
+  "id": "banditAttackSound",
+  "src": "sounds/bandit-attack.mp3"
 }];
 
 let game = {

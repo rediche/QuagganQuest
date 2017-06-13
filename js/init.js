@@ -10,6 +10,7 @@ function initialize() {
 
   // Initialize queue and preloader
   game.queue = new createjs.LoadQueue(true);
+  game.queue.installPlugin(createjs.Sound); // Make sounds work
   game.queue.loadManifest(MANIFEST);
   game.queue.on('progress', queueProgress);
   game.queue.on('complete', queueComplete);
