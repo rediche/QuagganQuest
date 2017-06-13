@@ -8,6 +8,10 @@ function initialize() {
   game.stage = new createjs.Stage('QuagganQuest');
   game.utility = new Utility();
 
+  // Add preload UI
+  game.preloadUI = new PreloadUI();
+  game.stage.addChild(game.preloadUI);
+
   // Initialize queue and preloader
   game.queue = new createjs.LoadQueue(true);
   game.queue.installPlugin(createjs.Sound); // Make sounds work
@@ -17,12 +21,16 @@ function initialize() {
 }
 
 function queueProgress(e) {
-  //console.log("Queue Progress:", e.progress);
+  game.preloadUI.loadingBar.progress.graphics.command.w = e.progress * 200;
   game.stage.update(e);
 }
 
 function queueComplete(e) {
   //console.log("Queue Completed!");
+  // Remove reloadUI
+  game.stage.removeChild(game.preloadUI);
+  game.preloadUI = null; // Clean up after myself
+
   //console.log(game.queue.getResult('mapsJson')[0]);
   game.spritesheets.dices.basic = new createjs.SpriteSheet(game.queue.getResult('diceSpriteSheetJson'));
 
