@@ -15,9 +15,9 @@ class Character extends Container {
     this.attackSound = 'banditAttackSound';
 
     if (config.color) {
-      this.makeBody(config.color);
+      this.body = this.makeBody(config.color);
     } else {
-      this.makeBody('white');
+      this.body = this.makeBody('white');
     }
   }
 
@@ -26,6 +26,7 @@ class Character extends Container {
     body.graphics.beginFill(color);
     body.graphics.drawRect(0, 0, 32, 32);
     this.addChild(body);
+    return body;
   }
 
   setHP(newHP) {
@@ -56,6 +57,16 @@ class Player extends Character {
     super();
 
     this.attackSound = 'quagganCooSound';
+    this.arenaLook = this.arenaLook();
+  }
+
+  arenaLook() {
+    let arenaLook = new createjs.Sprite(game.spritesheets.quaggan, "combatStance");
+    arenaLook.alpha = 0;
+
+    this.addChild(arenaLook);
+
+    return arenaLook
   }
 
 }

@@ -33,6 +33,7 @@ function queueComplete(e) {
 
   //console.log(game.queue.getResult('mapsJson')[0]);
   game.spritesheets.dices.basic = new createjs.SpriteSheet(game.queue.getResult('diceSpriteSheetJson'));
+  game.spritesheets.quaggan = new createjs.SpriteSheet(game.queue.getResult('quagganSpriteSheetJson'));
 
   game.map.current = 0;
 
@@ -151,6 +152,10 @@ function goIntoCombat() {
   view.current = view.options.combat;
 
   map.alpha = 0;
+
+  // Hide player body and show players arena look
+  player.body.alpha = 0;
+  player.arenaLook.alpha = 1;
 
   // Save player X,Y for when going back onto map
   player.mapX = player.x;

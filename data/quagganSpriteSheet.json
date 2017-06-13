@@ -1,0 +1,13 @@
+{
+  "images": ["img/quaggans/quaggan-combat.png"],
+  "framerate": 1,
+  "frames": {
+    "width": 32,
+    "height": 32,
+    "regX": 0,
+    "regY": 0
+  },
+  "animations": {
+    "combatStance": [0]
+  }
+}

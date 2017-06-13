@@ -5,6 +5,9 @@ const MANIFEST = [{
   "id": "diceSpriteSheetJson",
   "src": "data/diceSpriteSheet.json"
 },{
+  "id": "quagganSpriteSheetJson",
+  "src": "data/quagganSpriteSheet.json"
+},{
   "id": "grassyAreaImg",
   "src": "img/backgrounds/grassy-area.png"
 },{
