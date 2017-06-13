@@ -36,7 +36,19 @@ function queueComplete(e) {
   /* Add keyboard listeners */
   window.addEventListener('keydown', keyPressed);
   window.addEventListener('keyup', keyReleased);
+
+  /* Add sound listener */
+  document.querySelector('#mute').addEventListener('click', muteSounds);
 }
+
+/**
+ * Src: https://github.com/CreateJS/SoundJS/blob/master/examples/TestSuite.html
+ * @param {Event} e 
+ */
+function muteSounds(e) {
+  var muted = !createjs.Sound.muted;
+  createjs.Sound.muted = muted;
+} 
 
 function keyPressed(e) {
   switch (e.key) {
@@ -108,6 +120,7 @@ function initPlayer() {
 
 function initMap( settings ) {
   game.map.obj = new Map(settings);
+  game.map.obj.startBackgroundMusic();
   game.stage.addChild(game.map.obj);
 }
 

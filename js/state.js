@@ -16,6 +16,9 @@ const MANIFEST = [{
 },{
   "id": "banditAttackSound",
   "src": "sounds/bandit-attack.mp3"
+},{
+  "id": "openWorldMusic",
+  "src": "sounds/OpenWorldMusic.mp3"
 }];
 
 let game = {

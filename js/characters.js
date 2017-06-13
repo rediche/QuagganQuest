@@ -46,7 +46,7 @@ class Character extends Container {
   playAttackSound() {
     // Inherited in subclasses
     let attackSound = createjs.Sound.play(this.attackSound);
-    attackSound.setVolume(0.1);
+    attackSound.setVolume(1);
     attackSound.play();
   }
 }

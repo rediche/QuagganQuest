@@ -11,6 +11,7 @@ class Map extends Container {
     // Set initial state
     this.speed = 2;
     this.objects = [];
+    this.backgroundMusicSong = 'openWorldMusic'
 
     //console.log("Constructing Map:", this.settings.name);
 
@@ -19,6 +20,16 @@ class Map extends Container {
 
     // Draw objects on map
     this.drawLayers(settings.objects);
+  }
+
+  startBackgroundMusic() {
+    this.backgroundMusic = createjs.Sound.play(this.backgroundMusicSong);
+    this.backgroundMusic.setVolume(0.5);
+
+    // Loop the song
+    this.backgroundMusic.on('complete', function(e) {
+      e.target.play();
+    });
   }
 
   drawTiles( layer, saveTiles = false ) {

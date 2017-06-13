@@ -12,18 +12,39 @@
     <style>
       html, body {
         margin: 0;
+        font-family: 'Press Start 2P', sans-serif;
       }
       canvas {
         background-color: #333;
-        margin: 1rem auto;
         display: block;
+      }
+      .game-container {
+        margin: 1rem auto;
+        width: 416px;
+      }
+
+      button {
+        background-color: #333;
+        border: 0;
+        color: white;
+        font-size: 14px;
+        font-family: 'Press Start 2P', sans-serif;
+        padding: .5rem;
+      }
+      .center {
+        text-align: center;
       }
     </style>
   </head>
   <body>
-    <canvas id="QuagganQuest" width="416" height="288"></canvas>
-    <!-- 32 * 27 = 864 | 32 * 19 = 608 -->
-    <!-- 13: 416 | 9: 288 -->
+    <h1 class="center">QuagganQuest</h1>
+    <div class="game-container">
+      <canvas id="QuagganQuest" width="416" height="288"></canvas>
+      <!-- 32 * 27 = 864 | 32 * 19 = 608 -->
+      <!-- 13: 416 | 9: 288 -->
+
+      <button id="mute">Mute sounds</button>
+    </div>
 
     <script src="js/init.js"></script>
     <script src="js/state.js"></script>
