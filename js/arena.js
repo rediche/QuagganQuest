@@ -130,14 +130,14 @@ class Arena extends Container {
                 attacker.playAttackSound();
             })
             .to({
-                x: target.x + attacker.width / 2 // TODO: Should be minus attacker width for player.
+                x: target.x + attacker.width / 2 // TODO: NICE Should be minus attacker width for player.
             }, 500, createjs.Ease.elasticOut)
             .call(function() {
                 console.log("Target HP", target.hp);
                 target.setHP(target.hp - attacker.accumulatedDmg);
                 console.log("Target New HP", target.hp);
 
-                // TODO: Make animation showing HP being removed
+                // TODO: NICE Make animation showing HP being removed
                 
                 target.setAccumulatedDmg(0);
             })
@@ -158,8 +158,8 @@ class Arena extends Container {
                     } else {
                         game.stage.addChild(new GameOverUI());
 
-                        // TODO: Disable dices, fade them out slightly
-                        // TODO: Disable attack btn
+                        // TODO: NICE Disable dices, fade them out slightly
+                        // TODO: NICE Disable attack btn
                     }
                 } else {
                     that.nextTurn();

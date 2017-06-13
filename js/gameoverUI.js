@@ -4,7 +4,7 @@ class GameOverUI extends Container {
 
     this.text = this.createText();
     this.respawnBtn = this.respawnBtn();
-    // TODO: Animate in
+    // TODO: NICE Animate in
   }
 
   createText() {

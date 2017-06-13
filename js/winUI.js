@@ -4,7 +4,7 @@ class WinUI extends Container {
 
     this.text = this.createText();
     this.continueJourneyBtn = this.continueJourneyBtn();
-    // TODO: Animate in
+    // TODO: NICE Animate in
   }
 
   createText() {
