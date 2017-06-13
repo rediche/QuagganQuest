@@ -1,15 +1,14 @@
-class GameOverUI extends Container {
+class WinUI extends Container {
   constructor() {
     super();
 
     this.text = this.createText();
-    this.respawnBtn = this.respawnBtn();
-    // TODO: Animate in
+    this.continueJourneyBtn = this.continueJourneyBtn();
   }
 
   createText() {
     let text = new createjs.Text(
-      'You died.',
+      'You won.',
       "20px 'Press Start 2P'",
       'white'
     );
@@ -23,9 +22,9 @@ class GameOverUI extends Container {
     return text;
   }
 
-  respawnBtn() {
+  continueJourneyBtn() {
     let canvas = game.stage.canvas;
-    let respawnBtn = new RespawnButton();
+    let respawnBtn = new ContinueJourneyBtn();
 
     respawnBtn.x = canvas.width / 2 - respawnBtn.width / 2;
     respawnBtn.y = canvas.height / 2 - respawnBtn.height / 2 + 25;
@@ -35,14 +34,14 @@ class GameOverUI extends Container {
   }
 }
 
-class RespawnButton extends Button {
+class ContinueJourneyBtn extends Button {
     constructor() {
-        super('Respawn');
+        super('Continue');
     }
 
     onClick(e) {
-        game.map.obj.x = 0;
-        game.map.obj.y = 0;
+        //game.map.obj.x = 0;
+        //game.map.obj.y = 0;
         goOutOfCombat();
         game.stage.removeChild(e.target.parent.parent);
     }

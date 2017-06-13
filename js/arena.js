@@ -154,6 +154,7 @@ class Arena extends Container {
 
                     if (that.turn === that.turns.player) {
                         // TODO: Play win animation and then go back to map
+                        game.stage.addChild(new WinUI());
                     } else {
                         game.stage.addChild(new GameOverUI());
 

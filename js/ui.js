@@ -70,16 +70,3 @@ class AttackButton extends Button {
         }
     }
 }
-
-class RespawnButton extends Button {
-    constructor() {
-        super('Respawn');
-    }
-
-    onClick(e) {
-        game.map.obj.x = 0;
-        game.map.obj.y = 0;
-        goOutOfCombat();
-        game.stage.removeChild(e.target.parent.parent);
-    }
-}
