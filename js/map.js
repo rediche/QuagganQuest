@@ -38,7 +38,7 @@ class Map extends Container {
 
       for (let col = 0; col < layer.size.cols; col++) {
         let newTile = this.makeTileFromType(layer.type);
-        newTile.graphics.drawRect(0, 0, 32, 32);
+        //newTile.graphics.drawRect(0, 0, 32, 32);
         newTile.width = newTile.height = 32;
         newTile.setGridPosition(layer.grid.col + col, layer.grid.row + row);
         this.addChild(newTile);

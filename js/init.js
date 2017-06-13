@@ -27,17 +27,19 @@ function queueProgress(e) {
 
 function queueComplete(e) {
   //console.log("Queue Completed!");
-  // Remove reloadUI
-  game.stage.removeChild(game.preloadUI);
-  game.preloadUI = null; // Clean up after myself
 
   //console.log(game.queue.getResult('mapsJson')[0]);
+  game.spritesheets.tiles = new createjs.SpriteSheet(game.queue.getResult('tileSpriteSheetJson'));
   game.spritesheets.dices.basic = new createjs.SpriteSheet(game.queue.getResult('diceSpriteSheetJson'));
   game.spritesheets.quaggan = new createjs.SpriteSheet(game.queue.getResult('quagganSpriteSheetJson'));
 
   game.map.current = 0;
 
   startMap(game.map);  
+
+  // Remove reloadUI
+  game.stage.removeChild(game.preloadUI);
+  game.preloadUI = null; // Clean up after myself
 
   /* Add tick listener */
   createjs.Ticker.addEventListener('tick', onTick);

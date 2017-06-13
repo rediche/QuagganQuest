@@ -2,9 +2,9 @@
  * Inspired by PETL
  * Src: https://github.com/petlatkea/petersplayground/blob/master/js/tiles.js
  */
-class Tile extends createjs.Shape {
+class Tile extends createjs.Sprite {
   constructor( type ) {
-    super();
+    super(game.spritesheets.tiles);
     
     // Include position mixin
     Object.assign(this, positionMixin);
@@ -50,7 +50,8 @@ class Grass extends Tile {
   constructor() {
     super('grass');
 
-    this.graphics.beginFill('green');
+    this.gotoAndStop('grassMidMid');
+    //this.graphics.beginFill('green');
   }
 }
 
@@ -58,7 +59,8 @@ class Water extends Tile {
   constructor() {
     super('water');
 
-    this.graphics.beginFill('blue');
+    this.gotoAndStop('waterMidMid');
+    //this.graphics.beginFill('blue');
     this.walkable = false;
   }
 }
@@ -67,7 +69,8 @@ class Bush extends Tile {
   constructor() {
     super('bush');
 
-    this.graphics.beginFill('brown');
+    this.gotoAndStop('bushSpring');
+    //this.graphics.beginFill('brown');
 
     if (game.utility.generateRandomNumber(1, 100) > 50) {
       this.hasEnemy = true;
@@ -76,8 +79,7 @@ class Bush extends Tile {
 
   walkOn() {
     if (this.hasEnemy === true) {
-      console.log("oh shit! Enemy incoming!");
-      //game.fightInitator = this;
+      //console.log("oh shit! Enemy incoming!");
       game.fightInitiator = this;
       goIntoCombat();
     }

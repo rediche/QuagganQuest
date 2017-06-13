@@ -1,0 +1,55 @@
+{
+  "images": ["img/tiles.png"],
+  "frames": {
+    "width": 32,
+    "height": 32,
+    "regX": 0,
+    "regY": 0
+  },
+  "animations": {
+    "grassTopLeft": [0],
+    "grassTopMid": [1],
+    "grassTopRight": [2],
+    "grassMidLeft": [20],
+    "grassMidMid": [21],
+    "grassMidRight": [22],
+    "grassBottomLeft": [40],
+    "grassBottomMid": [41],
+    "grassBottomRight": [42],
+
+    "grassDirtCornerTopLeft": [24],
+    "grassDirtCornerBottomRight": [3],
+    "grassDirtCornerBottomLeft": [4],
+
+    "dirtTopLeft": [5],
+    "dirtTopMid": [6],
+    "dirtTopRight": [7],
+    "dirtMidLeft": [25],
+    "dirtMidMid": [26],
+    "dirtMidRight": [27],
+    "dirtBottomLeft": [45],
+    "dirtBottomMid": [46],
+    "dirtBottomRight": [47],
+
+    "waterTopLeft": [10],
+    "waterTopMid": [11],
+    "waterTopRight": [12],
+    "waterMidLeft": [30],
+    "waterMidMid": [31],
+    "waterMidRight": [32],
+    "waterBottomLeft": [50],
+    "waterBottomMid": [51],
+    "waterBottomRight": [52],
+
+    "bushSpring": [180],
+    "bushSummer": [182],
+    "bushAutumn": [184],
+
+    "fenceLeft": [226],
+    "fenceRight": [207],
+    "fenceEnd": [246],
+    
+    "treeBigTopAutumn": [204],
+    "treeBigBottomAutumn": [224]
+  }
+}
