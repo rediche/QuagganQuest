@@ -77,6 +77,8 @@ class Bush extends Tile {
   walkOn() {
     if (this.hasEnemy === true) {
       console.log("oh shit! Enemy incoming!");
+      //game.fightInitator = this;
+      game.fightInitiator = this;
       goIntoCombat();
     }
   }

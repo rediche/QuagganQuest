@@ -4,6 +4,7 @@ class WinUI extends Container {
 
     this.text = this.createText();
     this.continueJourneyBtn = this.continueJourneyBtn();
+    // TODO: Animate in
   }
 
   createText() {
@@ -40,8 +41,6 @@ class ContinueJourneyBtn extends Button {
     }
 
     onClick(e) {
-        //game.map.obj.x = 0;
-        //game.map.obj.y = 0;
         goOutOfCombat();
         game.stage.removeChild(e.target.parent.parent);
     }

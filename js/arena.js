@@ -153,8 +153,8 @@ class Arena extends Container {
                     console.log("Target is dead!");
 
                     if (that.turn === that.turns.player) {
-                        // TODO: Play win animation and then go back to map
                         game.stage.addChild(new WinUI());
+                        game.fightInitiator.hasEnemy = false;
                     } else {
                         game.stage.addChild(new GameOverUI());
 
