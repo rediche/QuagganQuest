@@ -177,6 +177,10 @@ function goOutOfCombat() {
   stage.removeChild(game.arena);
   game.arena = null;
 
+  // Hide player arena look and show players body
+  player.body.alpha = 1;
+  player.arenaLook.alpha = 0;
+
   // Put player back in original X,Y
   player.x = player.mapX;
   player.y = player.mapY;

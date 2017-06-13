@@ -155,7 +155,10 @@ class Arena extends Container {
                     if (that.turn === that.turns.player) {
                         // TODO: Play win animation and then go back to map
                     } else {
-                        // TODO: Add respawn screen (GAME OVER)
+                        game.stage.addChild(new GameOverUI());
+
+                        // TODO: Disable dices, fade them out slightly
+                        // TODO: Disable attack btn
                     }
                 } else {
                     that.nextTurn();

@@ -5,10 +5,13 @@ class Button extends Container {
         // Add PositionMixin to this class
         Object.assign(this, positionMixin);
 
-        console.log("Making new button...");
+        //console.log("Making new button...");
 
         this.background = this.createBackground();
         this.createText(btnText);
+
+        this.width = this.background.width;
+        this.height = this.background.height;
 
         this.addEventListener('click', this.onClick);
     }
@@ -68,3 +71,15 @@ class AttackButton extends Button {
     }
 }
 
+class RespawnButton extends Button {
+    constructor() {
+        super('Respawn');
+    }
+
+    onClick(e) {
+        game.map.obj.x = 0;
+        game.map.obj.y = 0;
+        goOutOfCombat();
+        game.stage.removeChild(e.target.parent.parent);
+    }
+}
