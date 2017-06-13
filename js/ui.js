@@ -2,9 +2,6 @@ class Button extends Container {
     constructor(btnText) {
         super();
 
-        // Add PositionMixin to this class
-        Object.assign(this, positionMixin);
-
         //console.log("Making new button...");
 
         this.background = this.createBackground();
@@ -61,10 +58,9 @@ class AttackButton extends Button {
     onClick(e) {
         let player = game.player;
 
-        if (game.player.canAttack === true) {
-            console.log("ATTACK!");
-            game.player.canAttack = false;
-            game.arena.attack(game.player, game.arena.enemy);
+        if (player.canAttack === true && player.accumulatedDmg > 0) {
+            player.canAttack = false;
+            game.arena.attack(player, game.arena.enemy);
         } else {
             console.log("You can't attack right now.");
         }

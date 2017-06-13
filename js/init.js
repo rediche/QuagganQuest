@@ -165,6 +165,11 @@ function goIntoCombat() {
   player.y = canvas.height - 96;
 
   initArena();
+
+  // Add HP Text to player
+  player.makeHPText('left');
+
+  game.utility.putOnTopOfStage(game.arena.enemy.hpText, game.stage);
 }
 
 function goOutOfCombat() {
@@ -172,6 +177,10 @@ function goOutOfCombat() {
   let player = game.player;
   let view = game.view;
   let map = game.map.obj;
+
+  // HP Texts
+  stage.removeChild(player.hpText);
+  stage.removeChild(game.arena.enemy.hpText);
 
   // Reset arena
   stage.removeChild(game.arena);
@@ -184,6 +193,9 @@ function goOutOfCombat() {
   // Put player back in original X,Y
   player.x = player.mapX;
   player.y = player.mapY;
+
+  // Rest player HP
+  player.hp = 20;
 
   // Show map again
   view.current = view.options.map;

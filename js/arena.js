@@ -38,6 +38,8 @@ class Arena extends Container {
 
         this.addChild(enemy);
         this.enemy = enemy;
+
+        enemy.makeHPText('right');
     }
 
     setTurn(who = 'player') {
@@ -78,20 +80,6 @@ class Arena extends Container {
                 break;
         }
     }
-
-    /*NPCThrowDice(enemy, index = 0) {
-        let roll = enemy.dices[index].roll();
-        enemy.setAccumulatedDmg(enemy.accumulatedDmg + roll);
-
-        if (roll === 1) {
-            console.log('Enemy Roll failed');
-            game.arena.nextTurn();
-        } else if (enemy.wantsToAttack()) {
-            NPCThrowDice(enemy, index++);
-        } else {
-            return 
-        }
-    }*/
 
     NPCTurn(enemy) {
         let rollFailed = false;
@@ -146,7 +134,6 @@ class Arena extends Container {
                 x: attackerInitialX
             }, 500, createjs.Ease.elasticOut)
             .call(function() {
-                // TODO: Reset thrown dices
                 attacker.setAccumulatedDmg(0);
 
                 if (target.hp <= 0) {

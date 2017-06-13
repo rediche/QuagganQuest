@@ -19,6 +19,38 @@ class Character extends Container {
     } else {
       this.body = this.makeBody('white');
     }
+
+    // TODO: Add HP event listener to Update HP Text
+  }
+
+  makeHPText(position) {
+    let canvas = game.stage.canvas;
+
+    let text = new createjs.Text(
+      'HP: ' + this.hp,
+      "12px 'Press Start 2P'",
+      'black'
+    );
+
+    switch (position) {
+      case 'right':
+        text.x = canvas.width - 8;
+        text.textAlign = 'right';
+        break;
+      case 'left':
+      default:
+        text.x = 8;
+        break;
+    }
+
+    text.y = 8;
+
+    this.hpText = text;
+    game.stage.addChild(this.hpText);
+  }
+
+  updateHPText() {
+    this.hpText.text = 'HP: ' + this.hp;
   }
 
   makeBody(color) {
@@ -31,6 +63,7 @@ class Character extends Container {
 
   setHP(newHP) {
     this.hp = newHP;
+    this.updateHPText();
   }
 
   setAccumulatedDmg(newAccumulatedDmg) {
