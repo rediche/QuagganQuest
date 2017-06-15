@@ -2,36 +2,61 @@
   "name": "Queensdale",
   "floor": {
     "type": "grass",
+    "offset": {
+      "x": 0,
+      "y": -640
+    },
     "grid": {
       "col": 0,
       "row": 0
     },
     "size": {
-      "cols": 27,
-      "rows": 19
+      "cols": 13,
+      "rows": 20
     }
   },
   "objects": [
     {
       "type": "water",
       "grid": {
-        "col": 2,
-        "row": 3
+        "col": 0,
+        "row": 7
       },
       "size": {
-        "cols": 2,
-        "rows": 2
+        "cols": 4,
+        "rows": 5
+      }
+    },
+    {
+      "type": "bush",
+      "grid":{
+        "col": 5,
+        "row": 6
+      },
+      "size":{
+        "cols": 7,
+        "rows": 1
       }
     },
     {
       "type": "bush",
       "grid": {
-        "col": 10,
+        "col": 4,
         "row": 7
       },
       "size": {
-        "cols": 6,
-        "rows": 3
+        "cols": 9,
+        "rows": 6
+      }
+    },{
+      "type": "boss",
+      "grid": {
+        "col": 6,
+        "row": 19
+      },
+      "size":{
+        "cols": 1,
+        "rows": 1
       }
     }
   ]

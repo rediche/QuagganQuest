@@ -85,3 +85,12 @@ class Bush extends Tile {
     }
   }
 }
+
+class Boss extends Bush {
+  constructor() {
+    super('boss');
+
+    this.gotoAndStop('bushSummer');
+    this.hasEnemy = true;
+  }
+}

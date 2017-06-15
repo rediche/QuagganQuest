@@ -23,6 +23,8 @@ class Map extends Container {
 
     // Draw objects on map
     this.drawLayers(settings.objects);
+
+    //this.setPosition(settings.floor.offset.x, settings.floor.offset.y); // Position map
   }
 
   startBackgroundMusic() {
@@ -74,6 +76,9 @@ class Map extends Container {
         break;
       case 'bush':
         tile = new Bush();
+        break;
+      case 'boss':
+        tile = new Boss();
         break;
     }
 
