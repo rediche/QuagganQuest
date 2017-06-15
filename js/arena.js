@@ -102,8 +102,6 @@ class Arena extends Container {
             } else {
                 console.log('Enemy dont want to throw another dice');
             }
-
-            if (game.fightingBoss) console.log(enemy.throws);
         }
 
         if (rollFailed === true) {

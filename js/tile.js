@@ -98,8 +98,10 @@ class BossTile extends Tile {
   }
 
   walkOn() {
-    game.fightInitiator = this;
-    game.fightingBoss = true;
-    goIntoCombat();
+    if (this.hasEnemy === true) {
+      game.fightInitiator = this;
+      game.fightingBoss = true;
+      goIntoCombat();
+    }
   }
 }
