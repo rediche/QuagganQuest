@@ -337,13 +337,14 @@ class ArenaUIDice extends Container {
             let roll = UIDice.dice.roll();
 
             console.log("Roll", roll);
+            UIDice.changeDiceFace(roll); // "this" doesn't work. Use event instead
 
             if (roll === 1) {
                 console.log('Roll failed');
                 game.arena.attackFailed('player');
+                player.setAccumulatedDmg(0);
                 game.arena.nextTurn();
             } else {
-                UIDice.changeDiceFace(roll); // "this" doesn't work. Use event instead
                 player.setAccumulatedDmg(player.accumulatedDmg + roll);
                 UIDice.dice.thrown = true;
             }
