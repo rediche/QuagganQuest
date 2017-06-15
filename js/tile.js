@@ -95,6 +95,7 @@ class BossTile extends Tile {
     super('boss', game.spritesheets.enemies);
 
     this.gotoAndStop('charGuard');
+    this.hasEnemy = true;
   }
 
   walkOn() {
