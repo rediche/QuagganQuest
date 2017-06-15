@@ -3,7 +3,7 @@ const MANIFEST = [{
   "src": "data/maps.json"
 },{
   "id": "tileSpriteSheetJson",
-  "src": "data/tileSpritesheet.json"
+  "src": "data/tileSpriteSheet.json"
 },{
   "id": "diceSpriteSheetJson",
   "src": "data/diceSpriteSheet.json"
