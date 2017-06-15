@@ -100,6 +100,25 @@ class Map extends Container {
         this.tryToMove(this.speed, 0);
         break;
     }
+
+    this.turn(direction); // Turn in the direction player is trying to move.
+  }
+
+  turn( direction ) {
+    switch (direction) {
+      case 'up':
+        game.player.body.rotation = 180;
+        break;
+      case 'down':
+        game.player.body.rotation = 0;
+        break;
+      case 'left':
+        game.player.body.rotation = 90;
+        break;
+      case 'right':
+        game.player.body.rotation = -90;
+        break;
+    }
   }
 
   tryToMove(diffX, diffY) {
@@ -123,11 +142,11 @@ class Map extends Container {
 
   hitMapBounds(diffX, diffY) {
     let player = game.player;
-    if (this.x + diffX > player.x || this.x + this.width + diffX < player.x + player.width) {
+    if (this.x + diffX > player.x - player.width / 2 || this.x + this.width + diffX < player.x + player.width / 2) {
       return true;
     } 
 
-    if (this.y + diffY > player.y || this.y + this.height + diffY < player.y + player.height) {
+    if (this.y + diffY > player.y - player.height / 2 || this.y + this.height + diffY < player.y + player.height / 2) {
       return true;
     }
 

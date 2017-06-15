@@ -1,6 +1,6 @@
 {
   "images": ["img/quaggans/quaggan-openworld.png"],
-  "framerate": 1,
+  "framerate": 6,
   "frames": {
     "width": 32,
     "height": 32,
@@ -9,6 +9,6 @@
   },
   "animations": {
     "standing": [0],
-    "moving": [0, 3]
+    "moving": [1, 2]
   }
 }

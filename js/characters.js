@@ -96,9 +96,11 @@ class Player extends Character {
   }
 
   makeBody(color) {
-    let body = new createjs.Sprite(game.spritesheets.quaggan.world, 'standing');
+    let body = new createjs.Sprite(game.spritesheets.quaggan.world, 'moving');
     //body.graphics.beginFill(color);
     //body.graphics.drawRect(0, 0, 32, 32);
+    body.regX = 16;
+    body.regY = 16;
     this.addChild(body);
     return body;
   }

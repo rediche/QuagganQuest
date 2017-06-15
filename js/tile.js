@@ -35,8 +35,8 @@ class Tile extends createjs.Sprite {
     // The map offset is needed, because the maps is a container of tiles,
     // so the tiles are relative position to the map and not global coordinates.
     // Simple Hit Detection. Overlap is not an issue.
-    let xHits = (this.x + map.x + offsetX + this.width > player.x && this.x + map.x + offsetX < player.x + player.width);
-    let yHits = (this.y + map.y + offsetY + this.height > player.y && this.y + map.y + offsetY < player.y + player.height);
+    let xHits = (this.x + map.x + offsetX + this.width > player.x - player.width / 2 && this.x + map.x + offsetX < player.x + player.width / 2);
+    let yHits = (this.y + map.y + offsetY + this.height > player.y - player.height / 2 && this.y + map.y + offsetY < player.y + player.height / 2);
 
     if (xHits && yHits) {
       return true;
