@@ -95,8 +95,16 @@ class Player extends Character {
     this.arenaLook = this.arenaLook();
   }
 
+  makeBody(color) {
+    let body = new createjs.Sprite(game.spritesheets.quaggan.world, 'standing');
+    //body.graphics.beginFill(color);
+    //body.graphics.drawRect(0, 0, 32, 32);
+    this.addChild(body);
+    return body;
+  }
+
   arenaLook() {
-    let arenaLook = new createjs.Sprite(game.spritesheets.quaggan, "combatStance");
+    let arenaLook = new createjs.Sprite(game.spritesheets.quaggan.attack, "combatStance");
     arenaLook.alpha = 0;
 
     this.addChild(arenaLook);
