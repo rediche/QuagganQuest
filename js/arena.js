@@ -252,6 +252,18 @@ class ArenaUI extends Container {
         });
     }
 
+    /**
+     * If the amount of thrown dices is the same as the amount of dices, reset so player can throw again.
+     */
+    resetDicesIfBothIsThrown() {
+        let matches = this.dices.filter(UIDice => { return UIDice.dice.thrown === true });
+
+        if (matches.length === this.dices.length) {
+            game.player.resetDices();
+            this.rollDices();
+        }
+    }
+
     createAccumulatedDamageText() {
         let canvas = game.stage.canvas;
         let text = new createjs.Text(
@@ -358,9 +370,9 @@ class ArenaUIDice extends Container {
             } else {
                 player.setAccumulatedDmg(player.accumulatedDmg + roll);
                 UIDice.dice.thrown = true;
-            }
 
-            
+                game.arena.ui.resetDicesIfBothIsThrown();
+            }  
         } else {
             console.log('This dice has already been thrown');
         }
