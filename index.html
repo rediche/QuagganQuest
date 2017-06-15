@@ -30,9 +30,38 @@
         font-size: 14px;
         font-family: 'Press Start 2P', sans-serif;
         padding: .5rem;
+        width: 50%;
+        float: left;
+      }
+      button#howtoplay {
+        background-color: #555;
       }
       .center {
         text-align: center;
+      }
+
+      .howtoplay {
+        box-sizing: border-box;
+        padding: 1rem;
+        position: absolute;
+        top: 75px;
+        color: white;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+        width: 416px;
+        height: 288px;
+        background-color: #333;
+
+        opacity: 0;
+        pointer-events: none;
+        transition: .3s;
+      }
+
+      .howtoplay.show {
+        opacity: 1;
+        pointer-events: initial;
       }
     </style>
   </head>
@@ -44,6 +73,15 @@
       <!-- 13: 416 | 9: 288 -->
 
       <button id="mute">Mute sounds</button>
+      <button id="howtoplay">How to play</button>
+    </div>
+
+    <div class="howtoplay">
+      <h2>How to play</h2>
+      <ul>
+        <li>Move using the arrow keys</li>
+        <li>Click your dices to throw them.</li>
+        <li>Click attack when you've thrown your dices.</li>
     </div>
 
     <script src="js/init.js"></script>

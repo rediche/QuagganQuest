@@ -50,6 +50,9 @@ function queueComplete(e) {
 
   /* Add sound listener */
   document.querySelector('#mute').addEventListener('click', muteSounds);
+
+  /* Add how to play listener */
+  document.querySelector('#howtoplay').addEventListener('click', howtoplayToggle);
 }
 
 /**
@@ -60,6 +63,10 @@ function muteSounds(e) {
   var muted = !createjs.Sound.muted;
   createjs.Sound.muted = muted;
 } 
+
+function howtoplayToggle(e) {
+  document.querySelector('.howtoplay').classList.toggle('show');
+}
 
 function keyPressed(e) {
   switch (e.key) {
