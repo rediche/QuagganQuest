@@ -13,6 +13,7 @@ class Character extends Container {
       new Dice(1, 6)
     ];
     this.attackSound = 'banditAttackSound';
+    this.attackSoundVolume = 1;
 
     if (config.color) {
       this.body = this.makeBody(config.color);
@@ -80,7 +81,7 @@ class Character extends Container {
   playAttackSound() {
     // Inherited in subclasses
     let attackSound = createjs.Sound.play(this.attackSound);
-    attackSound.setVolume(1);
+    attackSound.setVolume(this.attackSoundVolume);
     attackSound.play();
   }
 }
@@ -90,6 +91,7 @@ class Player extends Character {
     super();
 
     this.attackSound = 'quagganCooSound';
+    this.attackSoundVolume = 1;
     this.arenaLook = this.arenaLook();
   }
 
@@ -115,6 +117,7 @@ class Enemy extends Character {
     super({color: 'blue', hp: 20});
 
     this.dmgLimit = 5;
+    this.attackSoundVolume = 0.2;
   }
 
   wantsToThrowDice() {

@@ -27,7 +27,7 @@ class Map extends Container {
 
   startBackgroundMusic() {
     this.backgroundMusic = createjs.Sound.play(this.backgroundMusicSong);
-    this.backgroundMusic.setVolume(0.5);
+    this.backgroundMusic.setVolume(0.2);
 
     // Loop the song
     this.backgroundMusic.on('complete', function(e) {
