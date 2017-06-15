@@ -86,11 +86,16 @@ class Bush extends Tile {
   }
 }
 
-class Boss extends Bush {
+class BossTile extends Tile {
   constructor() {
     super('boss');
 
     this.gotoAndStop('bushSummer');
-    this.hasEnemy = true;
+  }
+
+  walkOn() {
+    game.fightInitiator = this;
+    game.fightingBoss = true;
+    goIntoCombat();
   }
 }

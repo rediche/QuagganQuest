@@ -112,9 +112,12 @@ class Player extends Character {
 
 }
 
+/**
+ * Example of having an upper dmg limit on enemy.
+ */
 class Enemy extends Character {
-  constructor() {
-    super({color: 'blue', hp: 20});
+  constructor(settings = {color: 'blue', hp: 20}) {
+    super(settings);
 
     this.dmgLimit = 5;
     this.attackSoundVolume = 0.2;
@@ -126,5 +129,26 @@ class Enemy extends Character {
     }
 
     return false;
+  }
+}
+
+/**
+ * Example of having a roll limit on enemy.
+ */
+class Boss extends Character {
+  constructor() {
+    super({color: 'royalblue', hp: 30});
+
+    this.throws = 0;
+    this.throwsLimit = 3;
+  }
+
+  wantsToThrowDice() {
+    if (this.throws < this.throwsLimit) {
+      this.throws = this.throws + 1;
+      return true;
+    } else {
+      return false;
+    }
   }
 }

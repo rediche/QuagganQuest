@@ -31,7 +31,13 @@ class Arena extends Container {
 
     createEnemy() {
         let canvas = game.stage.canvas;
-        let enemy = new Enemy();
+        let enemy
+        if (game.fightingBoss === true) {
+            enemy = new Boss();
+        } else {
+            enemy = new Enemy();
+        }
+        
 
         enemy.x = canvas.width - 32 - 32;
         enemy.y = canvas.height - 96;
@@ -96,6 +102,8 @@ class Arena extends Container {
             } else {
                 console.log('Enemy dont want to throw another dice');
             }
+
+            if (game.fightingBoss) console.log(enemy.throws);
         }
 
         if (rollFailed === true) {
@@ -105,6 +113,9 @@ class Arena extends Container {
         } else if (enemy.wantsToThrowDice()) { // Lets add some nice recursion, in case enemy still wants to throw
             this.NPCTurn(enemy);
         } else {
+            if (game.fightingBoss === true) {
+                enemy.throws = 0;
+            }
             this.attack(enemy, game.player);
         }
     }

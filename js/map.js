@@ -78,7 +78,7 @@ class Map extends Container {
         tile = new Bush();
         break;
       case 'boss':
-        tile = new Boss();
+        tile = new BossTile();
         break;
     }
 
