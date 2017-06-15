@@ -203,8 +203,9 @@ function goOutOfCombat() {
   player.x = player.mapX;
   player.y = player.mapY;
 
-  // Rest player HP
+  // Reset player
   player.hp = 20;
+  player.resetDices();
 
   // Show map again
   view.current = view.options.map;
