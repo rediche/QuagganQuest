@@ -3,8 +3,12 @@
  * Src: https://github.com/petlatkea/petersplayground/blob/master/js/tiles.js
  */
 class Tile extends createjs.Sprite {
-  constructor( type ) {
-    super(game.spritesheets.tiles);
+  constructor( type, spritesheet = null ) {
+    if (spritesheet) {
+      super(spritesheet);
+    } else {
+      super(game.spritesheets.tiles);
+    }
     
     // Include position mixin
     Object.assign(this, positionMixin);
@@ -88,9 +92,9 @@ class Bush extends Tile {
 
 class BossTile extends Tile {
   constructor() {
-    super('boss');
+    super('boss', game.spritesheets.enemies);
 
-    this.gotoAndStop('bushSummer');
+    this.gotoAndStop('charGuard');
   }
 
   walkOn() {

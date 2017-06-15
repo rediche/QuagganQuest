@@ -15,10 +15,10 @@ class Character extends Container {
     this.attackSound = 'banditAttackSound';
     this.attackSoundVolume = 1;
 
-    if (config.color) {
-      this.body = this.makeBody(config.color);
+    if (config.sprite) {
+      this.body = this.makeBody(config.sprite);
     } else {
-      this.body = this.makeBody('white');
+      this.body = this.makeBody();
     }
 
     // TODO: Add HP event listener to Update HP Text
@@ -54,10 +54,10 @@ class Character extends Container {
     this.hpText.text = 'HP: ' + this.hp;
   }
 
-  makeBody(color) {
-    let body = new createjs.Shape();
-    body.graphics.beginFill(color);
-    body.graphics.drawRect(0, 0, 32, 32);
+  makeBody(sprite = 'charCaveMan') {
+    let body = new createjs.Sprite(game.spritesheets.enemies, sprite);
+    //body.graphics.beginFill(color);
+    //body.graphics.drawRect(0, 0, 32, 32);
     this.addChild(body);
     return body;
   }
@@ -95,7 +95,7 @@ class Player extends Character {
     this.arenaLook = this.arenaLook();
   }
 
-  makeBody(color) {
+  makeBody(spritesheet) {
     let body = new createjs.Sprite(game.spritesheets.quaggan.world, 'moving');
     //body.graphics.beginFill(color);
     //body.graphics.drawRect(0, 0, 32, 32);
@@ -126,7 +126,7 @@ class Player extends Character {
  * Example of having an upper dmg limit on enemy.
  */
 class Enemy extends Character {
-  constructor(settings = {color: 'blue', hp: 20}) {
+  constructor(settings = {hp: 20}) {
     super(settings);
 
     this.dmgLimit = 5;
@@ -147,7 +147,7 @@ class Enemy extends Character {
  */
 class Boss extends Character {
   constructor() {
-    super({color: 'royalblue', hp: 30});
+    super({hp: 30, sprite: 'charGuard'});
 
     this.throws = 0;
     this.throwsLimit = 3;

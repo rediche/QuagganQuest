@@ -14,6 +14,9 @@ const MANIFEST = [{
   "id": "quagganTopSpriteSheetJson",
   "src": "data/quagganTopSpriteSheet.json"
 },{
+  "id": "enemiesSpriteSheetJson",
+  "src": "data/enemiesSpriteSheet.json"
+},{
   "id": "grassyAreaImg",
   "src": "img/backgrounds/grassy-area.png"
 },{
@@ -43,6 +46,7 @@ let game = {
     dices: {
       basic: null
     },
+    enemies: null,
     quaggan: {
       attack: null,
       world: null

@@ -1,0 +1,49 @@
+{
+  "images": ["img/enemies.png"],
+  "frames": {
+    "width": 32,
+    "height": 32,
+    "regX": 0,
+    "regY": 0,
+    "spacing": 2
+  },
+  "animations": {
+    "bodyPale": [0],
+    "bodyPaleMouth": [1],
+    "bodyLight": [54],
+    "bodyLightMouth": [55],
+    "bodyDark": [108],
+    "bodyDarkMouth": [109],
+    "bodyDarker": [162],
+    "bodyDarkerMouth": [163],
+
+    "charCaveMan": [324],
+    "charGuard": [594],
+
+    "pantsDark": [3],
+    "pantsGreen": [57],
+    "pantsWhite": [111],
+    "pantsBeige": [165],
+
+    "shoesDark": [4],
+    "shoesGreen": [58],
+    "shoesWhite": [112],
+    "shoesBeige": [166],
+    "shoesFancyDark": [219],
+    "shoesFancyRed": [220],
+
+    "shirtRedGreen": [6],
+    "shirtRedGreen2": [7],
+    "shirtRedGreen3": [8],
+    "shirtRedGreen4": [9],
+
+    "hairShortBrown": [19],
+    "hairLongBrown": [20],
+    "hairShortBrownBeard": [21],
+    "hairShortBrownBeardLong": [22],
+
+    "shieldWoodenSmall": [33],
+
+    "weaponsWoodenSpear": [44]
+  }
+}

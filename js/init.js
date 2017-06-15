@@ -33,6 +33,7 @@ function queueComplete(e) {
   game.spritesheets.dices.basic = new createjs.SpriteSheet(game.queue.getResult('diceSpriteSheetJson'));
   game.spritesheets.quaggan.attack = new createjs.SpriteSheet(game.queue.getResult('quagganSpriteSheetJson'));
   game.spritesheets.quaggan.world = new createjs.SpriteSheet(game.queue.getResult('quagganTopSpriteSheetJson'));
+  game.spritesheets.enemies = new createjs.SpriteSheet(game.queue.getResult('enemiesSpriteSheetJson'));
 
   game.map.current = 0;
 
