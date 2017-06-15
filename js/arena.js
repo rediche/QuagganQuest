@@ -100,12 +100,53 @@ class Arena extends Container {
 
         if (rollFailed === true) {
             console.log('Enemy Roll failed');
+            game.arena.attackFailed('enemy');
             game.arena.nextTurn();
         } else if (enemy.wantsToThrowDice()) { // Lets add some nice recursion, in case enemy still wants to throw
             this.NPCTurn(enemy);
         } else {
             this.attack(enemy, game.player);
         }
+    }
+
+    attackFailed(who) {
+        let text = new createjs.Container();
+
+        let whoText = new createjs.Text(
+            who + 's',
+            "10px 'Press Start 2P'",
+            'black'
+        );
+
+        let failedText = new createjs.Text(
+            'attack failed',
+            "16px 'Press Start 2P",
+            'black'
+        );
+
+        failedText.y = 12;
+
+        text.addChild(whoText);
+        text.addChild(failedText);
+
+        text.x = 100;
+        text.y = -100;
+
+        this.addChild(text);
+
+        let that = this;
+
+        createjs.Tween.get(text)
+            .to({
+                y: 100
+            }, 500, createjs.Ease.elasticOut)
+            .wait(1000)
+            .to({
+                y: -100
+            }, 500, createjs.Ease.elasticOut)
+            .call(function() {
+                that.removeChild(text);
+            });
     }
 
     attack(attacker, target) {
@@ -166,6 +207,7 @@ class ArenaUI extends Container {
         //this.createBackground();
         this.createDices();
         this.createAttackButton();
+        this.createAccumulatedDamageText();
     }
 
     createBackground() {
@@ -197,6 +239,26 @@ class ArenaUI extends Container {
         this.dices.forEach(dice => {
             dice.changeDiceFace(99);
         });
+    }
+
+    createAccumulatedDamageText() {
+        let canvas = game.stage.canvas;
+        let text = new createjs.Text(
+            'DMG: 0',
+            "16px 'Press Start 2P",
+            'white'
+        );
+
+        text.textAlign = 'center';
+        text.x = 8 + (32 + 16) * (this.amountOfDices + 1);
+        text.y = canvas.height - 32;
+
+        this.accumulatedDamageText = text;
+        this.addChild(text);
+    }
+
+    updateAccumulatedDamageText(dmg) {
+        this.accumulatedDamageText.text = 'DMG: ' + dmg;
     }
 
     createAttackButton() {
@@ -278,6 +340,7 @@ class ArenaUIDice extends Container {
 
             if (roll === 1) {
                 console.log('Roll failed');
+                game.arena.attackFailed('player');
                 game.arena.nextTurn();
             } else {
                 UIDice.changeDiceFace(roll); // "this" doesn't work. Use event instead

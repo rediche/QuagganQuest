@@ -102,6 +102,12 @@ class Player extends Character {
     return arenaLook
   }
 
+  setAccumulatedDmg(newAccumulatedDmg) {
+    this.accumulatedDmg = newAccumulatedDmg;
+    game.arena.ui.updateAccumulatedDamageText(newAccumulatedDmg);
+    //console.log("New accumulated dmg", this.accumulatedDmg);
+  }
+
 }
 
 class Enemy extends Character {
