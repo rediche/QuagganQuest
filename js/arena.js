@@ -188,6 +188,7 @@ class Arena extends Container {
 
                 if (target.hp <= 0) {
                     console.log("Target is dead!");
+                    game.fightingBoss = false;
 
                     if (that.turn === that.turns.player) {
                         game.stage.addChild(new WinUI());
