@@ -54,17 +54,47 @@ class Character extends Container {
     this.hpText.text = 'HP: ' + this.hp;
   }
 
+  setHP(newHP) {
+    let hpDiff = newHP - this.hp;
+    this.hp = newHP;
+    this.updateHPText();
+    this.hpTextAnimation(hpDiff);
+  }
+
+  hpTextAnimation(hpDiff) {
+    let text = new createjs.Text(
+      hpDiff,
+      "10px 'Press Start 2P'",
+      'black'
+    );
+
+    if (this.hpText.textAlign === 'left') {
+      text.x = this.hpText.x + this.hpText.getBounds().width;
+    } else {
+      text.x = this.hpText.x;
+    }
+    
+    text.textAlign = 'right';
+    text.y = this.hpText.y;
+
+    game.stage.addChild(text);
+
+    createjs.Tween.get(text)
+      .to({
+        y: text.y + 50,
+        alpha: 0
+      }, 1300, createjs.Ease.quartOut)
+      .call(function() {
+        game.stage.removeChild(text);
+    });
+  }
+
   makeBody(sprite = 'charCaveMan') {
     let body = new createjs.Sprite(game.spritesheets.enemies, sprite);
     //body.graphics.beginFill(color);
     //body.graphics.drawRect(0, 0, 32, 32);
     this.addChild(body);
     return body;
-  }
-
-  setHP(newHP) {
-    this.hp = newHP;
-    this.updateHPText();
   }
 
   setAccumulatedDmg(newAccumulatedDmg) {
