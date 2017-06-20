@@ -68,8 +68,37 @@ class Character extends Container {
   }
 
   setAccumulatedDmg(newAccumulatedDmg) {
+    let dmgDiff = newAccumulatedDmg - this.accumulatedDmg;
     this.accumulatedDmg = newAccumulatedDmg;
     //console.log("New accumulated dmg", this.accumulatedDmg);
+
+    // Run accumulated dmg animation
+    if (newAccumulatedDmg !== 0) {
+      this.accumulatedDmgAnimation(dmgDiff);
+    }
+  }
+
+  accumulatedDmgAnimation(dmgDiff) {
+    let text = new createjs.Text(
+      '+' + dmgDiff,
+      "10px 'Press Start 2P'",
+      'black'
+    );
+
+    text.textAlign = 'center';
+    text.x = this.x + 15;
+    text.y = this.y;
+
+    game.stage.addChild(text);
+
+    createjs.Tween.get(text)
+      .to({
+        y: text.y - 50,
+        alpha: 0
+      }, 1300, createjs.Ease.quartOut)
+      .call(function() {
+        game.stage.removeChild(text);
+    });
   }
 
   resetDices() {
@@ -115,9 +144,8 @@ class Player extends Character {
   }
 
   setAccumulatedDmg(newAccumulatedDmg) {
-    this.accumulatedDmg = newAccumulatedDmg;
+    super.setAccumulatedDmg(newAccumulatedDmg);
     game.arena.ui.updateAccumulatedDamageText(newAccumulatedDmg);
-    //console.log("New accumulated dmg", this.accumulatedDmg);
   }
 
 }
