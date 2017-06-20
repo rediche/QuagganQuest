@@ -122,7 +122,7 @@ class Arena extends Container {
         let text = new createjs.Container();
 
         let whoText = new createjs.Text(
-            who + 's',
+            who,
             "10px 'Press Start 2P'",
             'black'
         );
@@ -141,9 +141,7 @@ class Arena extends Container {
         text.x = 100;
         text.y = -100;
 
-        this.addChild(text);
-
-        let that = this;
+        game.stage.addChild(text);
 
         createjs.Tween.get(text)
             .to({
@@ -154,7 +152,7 @@ class Arena extends Container {
                 y: -100
             }, 500, createjs.Ease.elasticOut)
             .call(function() {
-                that.removeChild(text);
+                game.stage.removeChild(text);
             });
     }
 
